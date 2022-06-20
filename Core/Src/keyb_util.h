@@ -1,8 +1,8 @@
-
-#define NUMBER_OF_KEYS 7
+#define NUMBER_OF_KEYS 16
 
 //#include <stdint.h>
 #include "keymap.h"
+#include <extern_util.h>
 int i;
 
 //uint8_t keyPins[] = {DasKey_Pin, L_m_Pin};// Array of pins
@@ -25,7 +25,8 @@ void checkPins(void){
 	pinStates[6] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
 }
 
-int isHold[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};//ints showing which Layer the keys are held from
+int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
+		        0, 0, 0, 0,     0, 0, 0, 0};//ints showing which Layer the keys are held from
 //NOTE that if I leave it with 0 as unheld I cand have keys held from layer 0... or I need to start my layers at 1
 
 /*
@@ -35,16 +36,7 @@ uint8_t HIDKeyboardReport[] = {0, 0, 0, 0, 0, 0, 0, 0};
 uint8_t * pHIDKeyboardReport = &HIDKeyboardReport[0];
 uint16_t keyboardReportSize = sizeof(HIDKeyboardReport);
 */
-typedef struct {
-	uint8_t MOD;
-	uint8_t REZ;
-	uint8_t K1;
-	uint8_t K2;
-	uint8_t K3;
-	uint8_t K4;
-	uint8_t K5;
-	uint8_t K6;
-} keyboardHIDReport;
+
 
 keyboardHIDReport HIDKeyboardReport = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -54,7 +46,7 @@ int layerNum;
 
 
 
-void checkLayer(void){// Will probbaly end up setting the pointers to the mod and layer here
+void checkLayer(void){// Set pointers to the mod and layer here
 	layerNum = 1;
 	pModLayer = &modKeyLayer1[0];
 	pKeyLayer = &keyLayer1[0];
@@ -97,9 +89,9 @@ void setKeyBytes(uint8_t* code){
 
 void setReport(int keypress, uint8_t * modArray, uint8_t * keyArray){
 	uint8_t * modcode = modArray + keypress;
-	//	uint8_t * modcode = &modKeyLayer1[keypress];
+	//	uint8_t * modcode = modKeyLayer1[keypress]; ... also, this was &modKeyLayer1[keypress]... which isn't right
 	uint8_t * keycode = keyArray + keypress;
-	//	uint8_t * keycode = &keyLayer1[keypress]; if only one layer, makes mores ense to by amature mind
+	//	uint8_t * keycode = keyLayer1[keypress]; if only one layer, makes mores ense to by amature mind
 
 	setKeyBytes(keycode);
 	setModByte(modcode);
@@ -112,10 +104,10 @@ void setHeld(int keypress, int layerNumber){
 void setHeldReport(int keypress){
 	int holdLayer = isHold[keypress];//if isHold[0] then the key is not held, else it's the numebr of the layer it was pressed down in
 
-//Not sure why this double poitner system doesn't work...
+//Not sure why this double pointner system doesn't work...
 //	int layerRef = holdLayer - 1;
 
-//	uint8_t ** relLayer = layers[layerRef];
+//	uint8_t ** relLayer = layers[layerRef]; ...probbably because this fully defreferences the pointer?
 //	uint8_t * relMods = *relLayer;
 //	uint8_t * relKeys = *relLayer + 1;
 
