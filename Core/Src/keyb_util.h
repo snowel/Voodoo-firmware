@@ -140,6 +140,10 @@ void scanKeys(){
 	}
 }
 
+// scan function for keyboard settings i.e. swtichingmouse mode
+
+// scan for thumb-stick keys, so scans held, but sets the report to a prebuilt report mapped tot hat layer... technically with that the layer could still function normally... for mod keys... probbaly a more elegant solution for most cases... but I do like the manual mod map
+
 void clearReport(void){
 	HIDKeyboardReport.MOD = 0;
 	HIDKeyboardReport.K1 = 0;
