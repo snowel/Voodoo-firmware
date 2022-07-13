@@ -20,11 +20,73 @@
 #define RIGTH_JOY_LEFT 0x08
 #define RIGTH_JOY_UP 0x04
 #define RIGTH_JOY_RIGHT 0x02
-#define RIGTH_JOY_DOWN 0x01
+#define RIGTH_JOY_DOWN 0x01 // A more gneric but confusing way would be to have the directions be 1, 2, 4, 8 and then bitwise shift for the position of every stick
+
+#define LEFT_JOY_LEFT_TRESH 0x80
+#define LEFT_JOY_UP_TRESH 0x40
+#define LEFT_JOY_RIGHT_TRESH 0x20
+#define LEFT_JOY_DOWN_TRESH 0x10
+
+#define RIGTH_JOY_LEFT_TRESH 0x08
+#define RIGTH_JOY_UP_TRESH 0x04
+#define RIGTH_JOY_RIGHT_TRESH 0x02
+#define RIGTH_JOY_DOWN_TRESH 0x01
+
+#define DEFAULT_TRESH
+
+typedef joystate uint8_t;
+
+enum joyhandedness {
+	RIGTH_JOY = 1,
+	LEFT_JOY
+};
 
 // switch case with 25 cases
 
 int bitmaskToLayer(uint8_t bitmask){
 	swtich bitmask:
-	case 0
+	case 0;
+}
+
+// Set byte
+
+joystate* setJoystate(joystick* left, joystick* right, joystate* handle){
+	joydir leftDir = categorizeJoy(left);
+	joydir rigthDir = categorizeJoy(rigth);
+
+
+	switch(leftDir){
+		case NORTHWISE:
+			*handle = *handle | LEFT_JOY_UP;
+			break;
+		case EASTWISE:
+			*handle = *handle | LEFT_JOY_RIGHT;
+			break;
+		case SOUTHWISE:
+			*handle = *handle | LEFT_JOY_DOWN;
+			break;
+		case WESTWISE:
+			*handle = *handle | LEFT_JOY_LEFT;
+			break;
+		default:
+	}
+
+	switch(rightDir){
+		case NORTHWISE:
+			*handle = *handle | RIGHT_JOY_UP;
+			break;
+		case EASTWISE:
+			*handle = *handle | RIGHT_JOY_RIGHT;
+			break;
+		case SOUTHWISE:
+			*handle = *handle | RIGHT_JOY_DOWN;
+			break;
+		case WESTWISE:
+			*handle = *handle | RIGHT_JOY_LEFT;
+			break;
+		default:
+		}
+
+	return handle;
+
 }

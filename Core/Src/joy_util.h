@@ -1,11 +1,23 @@
 #define NESS_DELAY 18
+#define POT_MIDPOINT 2040
 
 uint8_t USBD_HID_SendReport(USBD_HandleTypeDef*, uint8_t*, uint16_t);
 
 #include "main.h"
 #include "usb_device.h"
 #include "usbd_hid.h"
+#include "layer_util.c"
+
+
 #include <extern_util.h>
+
+enum joydir {
+	CENTERWISE = 0,
+	NORTHWISE,
+	EASTWISE,
+	SOUTHWISE,
+	WESTWISE
+};
 
 //struct for joystick states
 typedef struct {
@@ -35,11 +47,35 @@ void readStick(joystick* stick){
 
 }
 
-void categorizeJoy(joystick stick){
-	uint16_t xVal = stick.xAxis;
-	uint16_t yVal = stick.yAxis;
+joydir categorizeJoy(joystick stick){
+	int16_t xVal = (int16_t)stick.xAxis;
+	int16_t yVal = (int16_t)stick.yAxis;
+
+	xVal -=  POT_MIDPOINT;
+	yVal -=  POT_MIDPOINT;
 
 
+	int xMag = abs(xVal);
+	int yMag = abs(yVal);
+
+	if(xMag >= DEFAULT_TRESH || yMag >= DEFAULT_TRESH) return CENTERWISE; //Stick not directed
+
+	if(xMag > yMag) {// HORZ MOTION
+		if(xVal > 0) {
+			return EASTWISE; // this needs to be automated to the polarit of the stick, knowing which way the resistance increses
+		} else {
+			return WESTWISE;
+		}
+
+	} else { // VERT MOTION
+		if(yVal > 0) {
+			return NORTHWISE; // this needs to be automated to the polarit of the stick, knowing which way the resistance increses
+		} else {
+			return SOUTHWISE;
+		}
+	}
+
+ return CENTERWISE; // If they're equal in magnitude they cancle out
 }
 
 //array of test variables
