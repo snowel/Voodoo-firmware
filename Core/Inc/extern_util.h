@@ -18,6 +18,5 @@ extern keyboardHIDReport HIDKeyboardReport;
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
-uint8_t USBD_HID_SendReport(USBD_HandleTypeDef*, uint8_t*, uint16_t);
 
 #endif //EXTERN_UTIL_H

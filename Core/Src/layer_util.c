@@ -1,5 +1,8 @@
+#ifndef LAYER_UTIL_C
+#define LAYER_UTIL_C
 
-
+#include <stdint.h>
+#include "joy_util.h"
 // the joy position will be broken down into a bitmask, the byte is mapped as follows:
 
 // 0 0 0 0 0 0 0 0
@@ -17,24 +20,24 @@
 #define LEFT_JOY_RIGHT 0x20
 #define LEFT_JOY_DOWN 0x10
 
-#define RIGTH_JOY_LEFT 0x08
-#define RIGTH_JOY_UP 0x04
-#define RIGTH_JOY_RIGHT 0x02
-#define RIGTH_JOY_DOWN 0x01 // A more gneric but confusing way would be to have the directions be 1, 2, 4, 8 and then bitwise shift for the position of every stick
+#define RIGHT_JOY_LEFT 0x08
+#define RIGHT_JOY_UP 0x04
+#define RIGHT_JOY_RIGHT 0x02
+#define RIGHT_JOY_DOWN 0x01 // A more gneric but confusing way would be to have the directions be 1, 2, 4, 8 and then bitwise shift for the position of every stick
 
 #define LEFT_JOY_LEFT_TRESH 0x80
 #define LEFT_JOY_UP_TRESH 0x40
 #define LEFT_JOY_RIGHT_TRESH 0x20
 #define LEFT_JOY_DOWN_TRESH 0x10
 
-#define RIGTH_JOY_LEFT_TRESH 0x08
-#define RIGTH_JOY_UP_TRESH 0x04
-#define RIGTH_JOY_RIGHT_TRESH 0x02
-#define RIGTH_JOY_DOWN_TRESH 0x01
+#define RIGHT_JOY_LEFT_TRESH 0x08
+#define RIGHT_JOY_UP_TRESH 0x04
+#define RIGHT_JOY_RIGHT_TRESH 0x02
+#define RIGHT_JOY_DOWN_TRESH 0x01
 
 #define DEFAULT_TRESH
 
-typedef joystate uint8_t;
+typedef uint8_t joystate;
 
 enum joyhandedness {
 	RIGTH_JOY = 1,
@@ -44,15 +47,15 @@ enum joyhandedness {
 // switch case with 25 cases
 
 int bitmaskToLayer(uint8_t bitmask){
-	swtich bitmask:
+	switch (bitmask):
 	case 0;
 }
 
 // Set byte
 
-joystate* setJoystate(joystick* left, joystick* right, joystate* handle){
-	joydir leftDir = categorizeJoy(left);
-	joydir rigthDir = categorizeJoy(rigth);
+joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_t tresh){
+	enum joydir leftDir = categorizeJoy(*left, tresh);
+	enum joydir rightDir = categorizeJoy(*rigth, tresh);
 
 
 	switch(leftDir){
@@ -90,3 +93,4 @@ joystate* setJoystate(joystick* left, joystick* right, joystate* handle){
 	return handle;
 
 }
+#endif //LAYER_UTILS_C

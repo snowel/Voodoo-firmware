@@ -1,7 +1,7 @@
-#include <usb_hid_keys.sh>
 #include "usb_hid_keys.h"
+
 #ifndef KEYMAP_H
-#define "KEYMAP_H"
+#define KEYMAP_H
 #define NUMBER_OF_LAYERS 25
 
 
@@ -60,13 +60,14 @@ uint8_t modKeyLayer2[] = {
 		     		  0, 0, 0, KEY_MOD_LSHIFT,     0, 0, KEY_MOD_LSHIFT, 0,
 	             0, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT
 			};
-uint8_t keyLayer2[] = {KEY_ESC KEY_TAB, KEY_PLUS, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
+uint8_t keyLayer2[] = {KEY_ESC, KEY_TAB, KEY_PLUS, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
                        KEY_U, KEY_F, KEY_PLUS, KEY_GRAVE,       KEY_COMMA, KEY_LEFTBRACE, KEY_RIGHTBRACE, KEY_BACKSLASH};
+
 // 3 = none right
 // Brackets
-uint8_t modKeyLayer1[] = {0, 0, 0, 0,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,
+uint8_t modKeyLayer3[] = {0, 0, 0, 0,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,
 	                      0, 0, 0, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT};
-uint8_t keyLayer1[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_LEFTBRACE, KEY_9, KEY_0, KEY_RIGHTBRACE,
+uint8_t keyLayer3[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_LEFTBRACE, KEY_9, KEY_0, KEY_RIGHTBRACE,
                        KEY_U, KEY_F, KEY_C, KEY_D,       KEY_COMMA, KEY_LEFTBRACE, KEY_RIGHTBRACE, KEY_DOT};
 // 4 = none up
 //L4 - imp shift base alpha
@@ -92,20 +93,20 @@ uint8_t keyLayer5[] = {0, 0, 0, 0,     0, 0, 0, 0,
 
 // 6 = down none
 // nums + mod keys
-uint8_t impMod16 = 0;
-uint8_t impKey16 = 0;
-uint8_t modKeyLayer16[] = {         0, 0, 0, 0,     0, 0, 0, 0,
+uint8_t impMod6 = 0;
+uint8_t impKey6 = 0;
+uint8_t modKeyLayer6[] = {         0, 0, 0, 0,     0, 0, 0, 0,
 KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, 0,     0, KEY_MOD_LALT, KEY_MOD_LSHIFT, KEY_MOD_LCTRL};
-uint8_t keyLayer16[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
+uint8_t keyLayer6[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
                                     0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
 // 7 = down down
 // WM (xmonad)
-uint8_t impMod6 = 0;
-uint8_t impKey6 = 0;
-uint8_t modKeyLayer6[] = {
+uint8_t impMod7 = 0;
+uint8_t impKey7 = 0;
+uint8_t modKeyLayer7[] = {
 		          KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT + KEY_MOD_LALT, KEY_MOD_LSHIFT,
 	              KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
-uint8_t keyLayer6[] = {
+uint8_t keyLayer7[] = {
 			KEY_1, KEY_2, KEY_3, KEY_4,       KEY_H, KEY_BACKSPACE, KEY_ENTER, KEY_L,
                 0, KEY_5, KEY_6, KEY_7,       KEY_1, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
 
@@ -170,26 +171,26 @@ uint8_t keyLayer19[] = {
 // 20 = up left
 // 21 = left none
 // Arrow keys et al.
-uint8_t modKeyLayer1[] = {0, 0, 0, 0,     0, 0, 0, 0,
+uint8_t modKeyLayer21[] = {0, 0, 0, 0,     0, 0, 0, 0,
 	                      0, 0, 0, 0,     0, 0, 0, 0};
-uint8_t keyLayer1[] = {       0, KEY_ESC, KEY_HOME, KEY_END,       KEY_LEFT, KEY_UP, KEY_DOWN, KEY_RIGHT,
+uint8_t keyLayer21[] = {       0, KEY_ESC, KEY_HOME, KEY_END,       KEY_LEFT, KEY_UP, KEY_DOWN, KEY_RIGHT,
                        0, 0, KEY_PAGEUP, KEY_PAGEDOWN,       KEY_LEFT, KEY_DOWN, KEY_RIGHT, KEY_W};
 // TODO this could be problemnatc due to vim hjkl motion
 // 22 = left down
 // Total mod key layer
-uint8_t modKeyLayer1[] = {
+uint8_t modKeyLayer22[] = {
 KEY_MOD_LCTRL, KEY_MOD_LMETA, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_RSHIFT,KEY_MOD_RALT, KEY_MOD_RMETA, KEY_MOD_RCTRL,
 KEY_MOD_RCTRL, KEY_MOD_RMETA, KEY_MOD_RALT, KEY_MOD_RSHIFT,     KEY_MOD_LSHIFT,KEY_MOD_LALT, KEY_MOD_LMETA, KEY_MOD_LCTRL};
-uint8_t keyLayer1[] = {0, 0, 0, 0,     0, 0, 0, 0,
+uint8_t keyLayer22[] = {0, 0, 0, 0,     0, 0, 0, 0,
                        0, 0, 0, 0,     0, 0, 0, 0};
 
 // 23 = left right
 // 24 = left up
 // Function 1-16
-uint8_t modKeyLayer1[] = {    0, 0, 0, 0,     0, 0, 0, 0,
+uint8_t modKeyLayer24[] = {    0, 0, 0, 0,     0, 0, 0, 0,
 	                      0, 0, 0, 0,     0, 0, 0, 0
 			};
-uint8_t keyLayer1[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4,       KEY_F5, KEY_F6, KEY_F7, KEY_F8,
+uint8_t keyLayer24[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4,       KEY_F5, KEY_F6, KEY_F7, KEY_F8,
                        KEY_F9, KEY_F10, KEY_F11, KEY_F12,       KEY_F13, KEY_F14, KEY_F15, KEY_F16};
 // 25 = left left
 

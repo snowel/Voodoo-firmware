@@ -1,7 +1,8 @@
+#ifndef JOY_UTIL_H
+#define JOY_UTIL_H
+
 #define NESS_DELAY 18
 #define POT_MIDPOINT 2040
-
-uint8_t USBD_HID_SendReport(USBD_HandleTypeDef*, uint8_t*, uint16_t);
 
 #include "main.h"
 #include "usb_device.h"
@@ -24,7 +25,7 @@ typedef struct {
 	uint16_t yAxis;
 	uint16_t xAxis;
 	uint8_t position; //1-North, 2-East, 3-South, 4-West
-} joystick;
+}joystick;
 
 joystick leftStick;
 joystick rightStick;
@@ -47,7 +48,7 @@ void readStick(joystick* stick){
 
 }
 
-joydir categorizeJoy(joystick stick){
+enum joydir categorizeJoy(joystick stick, uint32_t tresh){
 	int16_t xVal = (int16_t)stick.xAxis;
 	int16_t yVal = (int16_t)stick.yAxis;
 
@@ -58,7 +59,7 @@ joydir categorizeJoy(joystick stick){
 	int xMag = abs(xVal);
 	int yMag = abs(yVal);
 
-	if(xMag >= DEFAULT_TRESH || yMag >= DEFAULT_TRESH) return CENTERWISE; //Stick not directed
+	if(xMag >= tresh || yMag >= tresh) return CENTERWISE; //Stick not directed
 
 	if(xMag > yMag) {// HORZ MOTION
 		if(xVal > 0) {
@@ -143,3 +144,5 @@ void testMain(joystick* stick){
 	  HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
 	  joyLX = HAL_ADC_GetValue(&hadc1);
 */
+
+#endif //JOY_UTIL_H
