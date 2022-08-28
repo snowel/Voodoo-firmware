@@ -39,9 +39,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h \
- ../Core/Src/joy_util.h ../Core/Src/layer_util.c \
- ../Core/Inc/extern_util.h ../Core/Src/keyb_util.h ../Core/Src/keymap.h \
- ../Core/Inc/usb_hid_keys.h
+ ../Core/Src/keyb_util.h ../Core/Src/keymap.h ../Core/Inc/usb_hid_keys.h \
+ ../Core/Inc/extern_util.h ../Core/Src/layer_util.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -83,9 +82,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:
-../Core/Src/joy_util.h:
-../Core/Src/layer_util.c:
-../Core/Inc/extern_util.h:
 ../Core/Src/keyb_util.h:
 ../Core/Src/keymap.h:
 ../Core/Inc/usb_hid_keys.h:
+../Core/Inc/extern_util.h:
+../Core/Src/layer_util.h:

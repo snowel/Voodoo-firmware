@@ -60,8 +60,8 @@ uint8_t modKeyLayer2[] = {
 		     		  0, 0, 0, KEY_MOD_LSHIFT,     0, 0, KEY_MOD_LSHIFT, 0,
 	             0, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT
 			};
-uint8_t keyLayer2[] = {KEY_ESC, KEY_TAB, KEY_PLUS, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
-                       KEY_U, KEY_F, KEY_PLUS, KEY_GRAVE,       KEY_COMMA, KEY_LEFTBRACE, KEY_RIGHTBRACE, KEY_BACKSLASH};
+uint8_t keyLayer2[] = {KEY_ESC, KEY_TAB, KEY_EQUAL, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
+                       KEY_U, KEY_F, KEY_EQUAL, KEY_GRAVE,       KEY_COMMA, KEY_LEFTBRACE, KEY_RIGHTBRACE, KEY_BACKSLASH};
 
 // 3 = none right
 // Brackets
@@ -112,10 +112,10 @@ uint8_t keyLayer7[] = {
 
 // 8 = down right
 // WRITING SYMBOLS
-uint8_t modKeyLayer12[] = {0, 0, 0, KEY_MOD_LSHIFT,     0, 0, 0, 0,
+uint8_t modKeyLayer8[] = {0, 0, 0, KEY_MOD_LSHIFT,     0, 0, 0, 0,
 	                               0, 0, 0, 0,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT
 			};
-uint8_t keyLayer12[] = {KEY_ESC KEY_TAB, KEY_R, KEY_GRAVE,       KEY_MINUS, KEY_BACKSPACE, KEY_ENTER, KEY_BACKSLASH,
+uint8_t keyLayer8[] = {KEY_ESC, KEY_TAB, KEY_R, KEY_GRAVE,       KEY_MINUS, KEY_BACKSPACE, KEY_ENTER, KEY_BACKSLASH,
                        KEY_U, KEY_F, KEY_C, KEY_GRAVE,       KEY_1, KEY_SLASH, KEY_RIGHTBRACE, KEY_BACKSLASH};
 
 // 9 = down up
