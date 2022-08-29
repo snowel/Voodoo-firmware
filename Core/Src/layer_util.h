@@ -28,6 +28,10 @@ typedef struct joystick{
 joystick leftStick;
 joystick rightStick;
 
+//void initStick(uint32_t* DMA_buff, uint16_t restHandle, uint){
+
+//}
+
 void readStick(joystick* stick){
 	uint16_t currentX;
 	uint16_t currentY;
@@ -55,12 +59,12 @@ void readADCToJoy(joystick* stick, uint32_t* buff){
 
 }
 
-enum joydir categorizeJoy(joystick* stick, uint32_t tresh){
+enum joydir categorizeJoy(joystick* stick, uint32_t tresh, uint32_t* neutral){
 	int16_t xVal = (int16_t)stick->xAxis;
 	int16_t yVal = (int16_t)stick->yAxis;
 
-	xVal -=  POT_MIDPOINT;
-	yVal -=  POT_MIDPOINT;
+	xVal -=  neutral[0];
+	yVal -=  neutral[1];
 
 
 	int xMag = abs(xVal);
@@ -307,9 +311,9 @@ int bitmaskToLayer(uint8_t bitmask){
 
 // Set byte
 
-joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_t tresh){
-	enum joydir leftDir = categorizeJoy(left, tresh);
-	enum joydir rightDir = categorizeJoy(right, tresh);
+joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_t tresh, uint32_t* neutral){
+	enum joydir leftDir = categorizeJoy(left, tresh, neutral[0]);
+	enum joydir rightDir = categorizeJoy(right, tresh, neutral[1]);
 
 
 	switch(leftDir){

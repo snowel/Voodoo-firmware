@@ -12,17 +12,18 @@ int i;
 //struggling with arryas of pins and ports, this is my cheesy solution
 
 //Array of key pin states
-uint8_t pinStates[NUMBER_OF_KEYS];
+uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
 
 //Init the pin array
 void checkPins(void){
-	pinStates[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
-	pinStates[1] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
-	pinStates[2] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
-	pinStates[3] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
-	pinStates[4] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
-	pinStates[5] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
-	pinStates[6] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
+	pinStates[0] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
+	//pinStates[1] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
+	//pinStates[2] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
+	//pinStates[3] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
+	//pinStates[4] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
+	//pinStates[5] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
+	//pinStates[6] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
 }
 
 int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
@@ -50,6 +51,12 @@ void checkLayer(void){// Set pointers to the mod and layer here
 	layerNum = 1;
 	pModLayer = &modKeyLayer1[0];
 	pKeyLayer = &keyLayer1[0];
+}
+
+void checkLayerTEST(void){// Set pointers to the mod and layer here
+	layerNum = 2;
+	pModLayer = &modKeyLayer2[0];
+	pKeyLayer = &keyLayer2[0];
 }
 
 /*

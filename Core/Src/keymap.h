@@ -51,20 +51,24 @@ uint8_t impMod1 = 0;
 uint8_t impKey1 = 0;
 
 uint8_t modKeyLayer1[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	                      0, 0, 0, 0,     0, 0, 0, 0};
+	                  0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer1[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_N, KEY_E, KEY_I, KEY_O,
                        KEY_U, KEY_F, KEY_C, KEY_D,       KEY_H, KEY_M, KEY_L, KEY_W};
 // 2 = none down
 // CIRCUFIRENTIAL SYMBOLS
+uint8_t impMod2 = 0;
+uint8_t impKey2 = 0;
 uint8_t modKeyLayer2[] = {
 		     		  0, 0, 0, KEY_MOD_LSHIFT,     0, 0, KEY_MOD_LSHIFT, 0,
 	             0, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT
 			};
-uint8_t keyLayer2[] = {KEY_ESC, KEY_TAB, KEY_EQUAL, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
+uint8_t keyLayer2[] = {KEY_Z, KEY_TAB, KEY_EQUAL, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
                        KEY_U, KEY_F, KEY_EQUAL, KEY_GRAVE,       KEY_COMMA, KEY_LEFTBRACE, KEY_RIGHTBRACE, KEY_BACKSLASH};
 
 // 3 = none right
 // Brackets
+uint8_t impMod3 = 0;
+uint8_t impKey3 = 0;
 uint8_t modKeyLayer3[] = {0, 0, 0, 0,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,
 	                      0, 0, 0, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT};
 uint8_t keyLayer3[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_LEFTBRACE, KEY_9, KEY_0, KEY_RIGHTBRACE,
@@ -87,7 +91,7 @@ uint8_t keyLayer4[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_N, KEY_E, KEY_I, KE
 uint8_t impMod5 = 0;
 uint8_t impKey5 = KEY_SPACE;
 uint8_t modKeyLayer5[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	        			  0, 0, 0, 0,     0, 0, 0, 0};
+	        	  0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer5[] = {0, 0, 0, 0,     0, 0, 0, 0,
                        0, 0, 0, 0,     0, 0, 0, 0};
 
@@ -95,8 +99,8 @@ uint8_t keyLayer5[] = {0, 0, 0, 0,     0, 0, 0, 0,
 // nums + mod keys
 uint8_t impMod6 = 0;
 uint8_t impKey6 = 0;
-uint8_t modKeyLayer6[] = {         0, 0, 0, 0,     0, 0, 0, 0,
-KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, 0,     0, KEY_MOD_LALT, KEY_MOD_LSHIFT, KEY_MOD_LCTRL};
+uint8_t modKeyLayer6[] = {             0, 0, 0, 0,     0, 0, 0, 0,
+   KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, 0,     0, KEY_MOD_LALT, KEY_MOD_LSHIFT, KEY_MOD_LCTRL};
 uint8_t keyLayer6[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
                                     0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
 // 7 = down down
@@ -104,47 +108,83 @@ uint8_t keyLayer6[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KE
 uint8_t impMod7 = 0;
 uint8_t impKey7 = 0;
 uint8_t modKeyLayer7[] = {
-		          KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT + KEY_MOD_LALT, KEY_MOD_LSHIFT,
-	              KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
+		          KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT + KEY_MOD_LALT, KEY_MOD_LSHIFT,
+	                  KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
 uint8_t keyLayer7[] = {
 			KEY_1, KEY_2, KEY_3, KEY_4,       KEY_H, KEY_BACKSPACE, KEY_ENTER, KEY_L,
-                0, KEY_5, KEY_6, KEY_7,       KEY_1, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
+                            0, KEY_5, KEY_6, KEY_7,       KEY_P, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
+
+// REF
+//                     [wksp 1] [wksp 2] [wkps 3] [wksp 4]
+//                     [move window + wksp]                     [dmenu]  
 
 // 8 = down right
 // WRITING SYMBOLS
+uint8_t impMod8 = 0;
+uint8_t impKey8 = 0;
 uint8_t modKeyLayer8[] = {0, 0, 0, KEY_MOD_LSHIFT,     0, 0, 0, 0,
 	                               0, 0, 0, 0,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT
 			};
 uint8_t keyLayer8[] = {KEY_ESC, KEY_TAB, KEY_R, KEY_GRAVE,       KEY_MINUS, KEY_BACKSPACE, KEY_ENTER, KEY_BACKSLASH,
-                       KEY_U, KEY_F, KEY_C, KEY_GRAVE,       KEY_1, KEY_SLASH, KEY_RIGHTBRACE, KEY_BACKSLASH};
+                           KEY_U, KEY_F, KEY_C, KEY_GRAVE,       KEY_1, KEY_SLASH, KEY_RIGHTBRACE, KEY_BACKSLASH};
 
 // 9 = down up
 // Number layer shifted
+uint8_t impMod9 = 0;
+uint8_t impKey9 = 0;
 uint8_t modKeyLayer9[] = {
    KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,
    KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_LSHIFT,KEY_MOD_LALT, KEY_MOD_LSHIFT, KEY_MOD_LCTRL};
 uint8_t keyLayer[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
                                     0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
 // 10 = down left
+uint8_t impMod10 = 0;
+uint8_t impKey10 = KEY_SPACE;
+uint8_t modKeyLayer10[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	        	   0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer10[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                        0, 0, 0, 0,     0, 0, 0, 0};
+
 // 11 = right none
 // Base Alphas 2
 uint8_t impMod11 = 0;
 uint8_t impKey11 = 0;
 uint8_t modKeyLayer11[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	                       0, 0, 0, 0,     0, 0, 0, 0};
+	                   0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer11[] = {KEY_Q, KEY_K, KEY_Y, KEY_B,       KEY_P, KEY_SEMICOLON, KEY_APOSTROPHE, KEY_BACKSPACE,
                         KEY_Z, KEY_J, KEY_V, KEY_G,       KEY_M, KEY_COMMA, KEY_DOT, KEY_X};
 // 12 = rigth down
+uint8_t impMod12 = 0;
+uint8_t impKey12 = 0;
+uint8_t modKeyLayer12[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	       		   0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer12[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                        0, 0, 0, 0,     0, 0, 0, 0};
+
 // 13 = right right
+uint8_t impMod13 = 0;
+uint8_t impKey13 = 0;
+uint8_t modKeyLayer13[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	       		   0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer13[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                        0, 0, 0, 0,     0, 0, 0, 0};
+
 // 14 = right up
 // Shifted base alpha 2
 uint8_t impMod14 = KEY_MOD_LSHIFT;
 uint8_t impKey14 = 0;
 uint8_t modKeyLayer14[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	                       0, 0, 0, 0,     0, 0, 0, 0};
+	                   0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer14[] = {KEY_Q, KEY_K, KEY_Y, KEY_B,       KEY_P, KEY_SEMICOLON, KEY_APOSTROPHE, KEY_BACKSPACE,
                         KEY_Z, KEY_J, KEY_V, KEY_G,       KEY_M, KEY_COMMA, KEY_DOT, KEY_X};
 // 15 = right left
+uint8_t impMod15 = 0;
+uint8_t impKey15 = KEY_SPACE;
+uint8_t modKeyLayer15[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	               	   0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer15[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                        0, 0, 0, 0,     0, 0, 0, 0};
+
 // 16 = up none
 //L16 - nums + mod keys
 uint8_t impMod16 = 0;
@@ -154,21 +194,43 @@ KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, 0,     0, KEY_MOD_LALT, KEY_MOD_LSH
 uint8_t keyLayer16[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
                                     0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
 // 17 = up down
+uint8_t impMod17 = 0;
+uint8_t impKey17 = KEY_SPACE;
+uint8_t modKeyLayer17[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	        			  0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer17[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                       0, 0, 0, 0,     0, 0, 0, 0};
+
 // 18 = up right
+uint8_t impMod18 = 0;
+uint8_t impKey18 = KEY_SPACE;
+uint8_t modKeyLayer18[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	         	   0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer18[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                        0, 0, 0, 0,     0, 0, 0, 0};
+
 // 19 = up up
 // TMUX
 uint8_t impMod19 = 0;
 uint8_t impKey19 = 0;
 uint8_t modKeyLayer19[] = {
 		          KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_LCTRL, 0, KEY_MOD_LSHIFT + KEY_MOD_LALT, KEY_MOD_LSHIFT,
-	              KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
+	                  KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
 uint8_t keyLayer19[] = {
 			KEY_1, KEY_2, KEY_3, KEY_4,       KEY_SPACE, KEY_N, KEY_ENTER, KEY_L,
-                0, KEY_5, KEY_6, KEY_7,       KEY_1, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
+                            0, KEY_5, KEY_6, KEY_7,       KEY_1, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
 // Ref bindings
-//   [split vert] [search] [create window] [dfdf]     [Leader] [prev window] [next window]
-//
+//   [split vert] [search] [create window] [dfdf]     [Leader] [prev window] [next window] [split horz]
+//                                      [del win]      [move] [move] [move] [move]
+
 // 20 = up left
+uint8_t impMod20 = 0;
+uint8_t impKey20 = 0;
+uint8_t modKeyLayer20[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	        			  0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer20[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                        0, 0, 0, 0,     0, 0, 0, 0};
+
 // 21 = left none
 // Arrow keys et al.
 uint8_t modKeyLayer21[] = {0, 0, 0, 0,     0, 0, 0, 0,
@@ -185,14 +247,29 @@ uint8_t keyLayer22[] = {0, 0, 0, 0,     0, 0, 0, 0,
                        0, 0, 0, 0,     0, 0, 0, 0};
 
 // 23 = left right
+uint8_t impMod23 = 0;
+uint8_t impKey23 = KEY_SPACE;
+uint8_t modKeyLayer23[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	        			  0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer23[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                       0, 0, 0, 0,     0, 0, 0, 0};
+
 // 24 = left up
 // Function 1-16
+uint8_t impMod24 = 0;
+uint8_t impKey24 = KEY_SPACE;
 uint8_t modKeyLayer24[] = {    0, 0, 0, 0,     0, 0, 0, 0,
 	                      0, 0, 0, 0,     0, 0, 0, 0
 			};
 uint8_t keyLayer24[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4,       KEY_F5, KEY_F6, KEY_F7, KEY_F8,
                        KEY_F9, KEY_F10, KEY_F11, KEY_F12,       KEY_F13, KEY_F14, KEY_F15, KEY_F16};
 // 25 = left left
+uint8_t impMod25 = 0;
+uint8_t impKey25 = KEY_SPACE;
+uint8_t modKeyLayer25[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	        			  0, 0, 0, 0,     0, 0, 0, 0};
+uint8_t keyLayer25[] = {0, 0, 0, 0,     0, 0, 0, 0,
+                       0, 0, 0, 0,     0, 0, 0, 0};
 
 
 
@@ -202,6 +279,109 @@ uint8_t keyLayer24[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4,       KEY_F5, KEY_F6, KE
 //testing another way with a more complicated fetching procedure to see if my first implementaiton is at fault:
 
 uint8_t * testLayerRef[] = {&modKeyLayer1[0], &keyLayer1[0], &modKeyLayer2[0], &keyLayer2[0]};
+
+// Full reference, single array
+
+uint8_t * FullLayerRef[] = {&impMod1, &impKey1, &modKeyLayer1[0], &keyLayer1[0], &impMod2, &impKey2, &modKeyLayer2[0], &keyLayer2[0], &impMod3, &impKey3, &modKeyLayer3[0], &keyLayer3[0], &impMod4, &impKey4, &modKeyLayer4[0], &keyLayer4[0], &impMod5, &impKey5, &modKeyLayer5[0], &keyLayer5[0], &impMod6, &impKey6, &modKeyLayer6[0], &keyLayer6[0], &impMod7, &impKey7, &modKeyLayer7[0], &keyLayer7[0], &impMod8, &impKey8, &modKeyLayer8[0], &keyLayer8[0], &impMod9, &impKey9, &modKeyLayer9[0], &keyLayer9[0], &impMod10, &impKey10, &modKeyLayer10[0], &keyLayer10[0], &impMod11, &impKey11, &modKeyLayer11[0], &keyLayer11[0], &impMod12, &impKey12, &modKeyLayer12[0], &keyLayer12[0], &impMod13, &impKey13, &modKeyLayer13[0], &keyLayer13[0], &impMod14, &impKey14, &modKeyLayer14[0], &keyLayer14[0], &impMod15, &impKey15, &modKeyLayer15[0], &keyLayer15[0], &impMod16, &impKey16, &modKeyLayer16[0], &keyLayer16[0], &impMod17, &impKey17, &modKeyLayer17[0], &keyLayer17[0], &impMod18, &impKey18, &modKeyLayer18[0], &keyLayer18[0], &impMod19, &impKey19, &modKeyLayer19[0], &keyLayer19[0], &impMod20, &impKey20, &modKeyLayer20[0], &keyLayer20[0], &impMod21, &impKey21, &modKeyLayer21[0], &keyLayer21[0], &impMod22, &impKey22, &modKeyLayer22[0], &keyLayer22[0], &impMod23, &impKey23, &modKeyLayer23[0], &keyLayer23[0], &impMod24, &impKey24, &modKeyLayer24[0], &keyLayer24[0], &impMod25, &impKey25, &modKeyLayer25[0], &keyLayer25[0]};
+// Useful format for other management
+
+/*
+
+uint8_t * testLayerRef[] = {&impMod1, &impKey1, &modKeyLayer1[0], &keyLayer1[0]};
+uint8_t * testLayerRef[] = {&impMod2, &impKey2, &modKeyLayer2[0], &keyLayer2[0]};
+uint8_t * testLayerRef[] = {&impMod3, &impKey3, &modKeyLayer3[0], &keyLayer3[0]};
+uint8_t * testLayerRef[] = {&impMod4, &impKey4, &modKeyLayer4[0], &keyLayer4[0]};
+uint8_t * testLayerRef[] = {&impMod5, &impKey5, &modKeyLayer5[0], &keyLayer5[0]};
+uint8_t * testLayerRef[] = {&impMod6, &impKey6, &modKeyLayer6[0], &keyLayer6[0]};
+uint8_t * testLayerRef[] = {&impMod7, &impKey7, &modKeyLayer7[0], &keyLayer7[0]};
+uint8_t * testLayerRef[] = {&impMod8, &impKey8, &modKeyLayer8[0], &keyLayer8[0]};
+uint8_t * testLayerRef[] = {&impMod9, &impKey9, &modKeyLayer9[0], &keyLayer9[0]};
+uint8_t * testLayerRef[] = {&impMod10, &impKey10, &modKeyLayer10[0], &keyLayer10[0]};
+uint8_t * testLayerRef[] = {&impMod11, &impKey11, &modKeyLayer11[0], &keyLayer11[0]};
+uint8_t * testLayerRef[] = {&impMod12, &impKey12, &modKeyLayer12[0], &keyLayer12[0]};
+uint8_t * testLayerRef[] = {&impMod13, &impKey13, &modKeyLayer13[0], &keyLayer13[0]};
+uint8_t * testLayerRef[] = {&impMod14, &impKey14, &modKeyLayer14[0], &keyLayer14[0]};
+uint8_t * testLayerRef[] = {&impMod15, &impKey15, &modKeyLayer15[0], &keyLayer15[0]};
+uint8_t * testLayerRef[] = {&impMod16, &impKey16, &modKeyLayer16[0], &keyLayer16[0]};
+uint8_t * testLayerRef[] = {&impMod17, &impKey17, &modKeyLayer17[0], &keyLayer17[0]};
+uint8_t * testLayerRef[] = {&impMod18, &impKey18, &modKeyLayer18[0], &keyLayer18[0]};
+uint8_t * testLayerRef[] = {&impMod19, &impKey19, &modKeyLayer19[0], &keyLayer19[0]};
+uint8_t * testLayerRef[] = {&impMod20, &impKey20, &modKeyLayer20[0], &keyLayer20[0]};
+uint8_t * testLayerRef[] = {&impMod21, &impKey21, &modKeyLayer21[0], &keyLayer21[0]};
+uint8_t * testLayerRef[] = {&impMod22, &impKey22, &modKeyLayer22[0], &keyLayer22[0]};
+uint8_t * testLayerRef[] = {&impMod23, &impKey23, &modKeyLayer23[0], &keyLayer23[0]};
+uint8_t * testLayerRef[] = {&impMod24, &impKey24, &modKeyLayer24[0], &keyLayer24[0]};
+uint8_t * testLayerRef[] = {&impMod25, &impKey25, &modKeyLayer25[0], &keyLayer25[0]};
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //For some reason this:
 //uint8_t ** layers[] = {&layer1[0]};
