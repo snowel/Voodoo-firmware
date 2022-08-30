@@ -3,13 +3,16 @@
 #include "usbd_hid.h"
 #include <extern_util.h>
 #include <stdint.h>
+#include "keyb_util.h"
 
 
-// Star joy stick
+// Start joystick code
 
 #define NESS_DELAY 18
 #define POT_MIDPOINT 2040
 
+// extodo the enum could directly have the mask?
+// That won't work because each joy has different mask values
 enum joydir {
 	CENTERWISE = 0,
 	EASTWISE,
@@ -22,44 +25,105 @@ enum joydir {
 typedef struct joystick{
 	uint16_t yAxis;
 	uint16_t xAxis;
-	uint8_t position; //1-south, 2-East, 3-North, 4-West
+	uint16_t xNeutral;
+	uint16_t yNeutral;
+	uint8_t xPolarity; // 0 = Resistance decress (reading incresess) to the right; 1 = Resistance decresses to the left.
+	uint8_t yPolarity; // 0 = Resistance decresses to the top; 1 = ressistance decresses towards the bottom
+	enum joydir position;
 } joystick;
+
+//TODO polarity calibration
+
+typedef struct joytresh{
+	uint16_t upTresh;
+	uint16_t downTresh;
+	uint16_t rightTresh;
+	uint16_t leftTresh;
+}joytresh;
 
 joystick leftStick;
 joystick rightStick;
+
+// Calibrating Functions
 
 //void initStick(uint32_t* DMA_buff, uint16_t restHandle, uint){
 
 //}
 
-void readStick(joystick* stick){
+void readStick(joystick* stick, void (*xChan)(void), void (*yChan)(void)){
 	uint16_t currentX;
 	uint16_t currentY;
 
-	HAL_ADC_Start(&hadc1);
-	HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-	currentX = HAL_ADC_GetValue(&hadc1);
+	 (*xChan);
+	 HAL_ADC_Start(&hadc1);
+	 HAL_ADC_PollForConversion(&hadc1, 1000);
+     currentX = HAL_ADC_GetValue(&hadc1);
+	 HAL_ADC_Stop(&hadc1);
 
-	HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
-	currentY = HAL_ADC_GetValue(&hadc1);
-
-	HAL_ADC_Stop(&hadc1);
+	 (*yChan);
+	 HAL_ADC_Start(&hadc1);
+	 HAL_ADC_PollForConversion(&hadc1, 1000);
+     currentY = HAL_ADC_GetValue(&hadc1);
+	 HAL_ADC_Stop(&hadc1);
 
 	stick->xAxis = currentX;
 	stick->yAxis = currentY;
 
 }
 
-void readADCToJoy(joystick* stick, uint32_t* buff){
-	uint16_t xVal = (uint16_t)(buff[0] >> 16);
-	uint16_t yVal = (uint16_t)(buff[0] >> 16);
 
-	stick->xAxis = xVal;
-	stick->yAxis = yVal;
+enum joydir categorizeJoy(joystick* stick, uint16_t tresh){
 
+	int16_t xDif;
+	int16_t yDif;
+
+	// Substract the neutral and position for the sign to match cartesian convention
+	if(stick->xPolarity == 0) {
+		xDif = (int16_t)stick->xAxis - stick->xNeutral;
+	} else {
+		xDif = (int16_t)stick->xNeutral - stick->xAxis;
+	}
+
+	if(stick->yPolarity == 0) {
+	    yDif = (int16_t)stick->yAxis - stick->yNeutral;
+	} else {
+		yDif = (int16_t)stick->xNeutral - stick->xAxis;
+	}
+
+
+	int xMag = abs(xDif);
+	int yMag = abs(yDif);
+
+	if(xMag <= tresh || yMag <= tresh){
+		stick->position = CENTERWISE;
+		return CENTERWISE; //Stick not directed
+	}
+
+	if(xMag > yMag) {// HORIZONTAL MOTION
+		if(xDif > 0) {
+			stick->position = EASTWISE;
+			return EASTWISE;
+		} else {
+			stick->position = WESTWISE;
+			return WESTWISE;
+		}
+
+	} else { // VERTICAL MOTION
+		if(yDif > 0) {
+			stick->position = NORTHWISE;
+			return NORTHWISE;
+		} else {
+			stick->position = SOUTHWISE;
+			return SOUTHWISE;
+		}
+	}
+ stick->position = CENTERWISE;
+ return CENTERWISE; // If they're equal in magnitude they cancel out... Very Unlikely
 }
 
-enum joydir categorizeJoy(joystick* stick, uint32_t tresh, uint32_t* neutral){
+/*
+ * Old, temp save
+ *enum joydir categorizeJoy(joystick* stick, uint32_t tresh, uint32_t* neutral){
 	int16_t xVal = (int16_t)stick->xAxis;
 	int16_t yVal = (int16_t)stick->yAxis;
 
@@ -89,8 +153,11 @@ enum joydir categorizeJoy(joystick* stick, uint32_t tresh, uint32_t* neutral){
 
  return CENTERWISE; // If they're equal in magnitude they cancle out
 }
-//array of test variables
+ *
+ * */
 
+//array of test variables
+/* Currious if this works...
 uint16_t butRef[] = {0, 0, 0, 0, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1};
 uint8_t mapRef[16];
 uint8_t keycodeOne = 0x1e;
@@ -147,7 +214,7 @@ void testMain(joystick* stick){
 	joystickKeyPrint(valY);
 	HAL_Delay(1500);
 }
-
+*/
 /*
 
 	  HAL_ADC_Start(&hadc1);
@@ -309,11 +376,20 @@ int bitmaskToLayer(uint8_t bitmask){
 	}
 }
 
+// Set's layer
+void layerNumToRef(Layer* layerHandle, Layer* keymap, int layerNum){
+	layerHandle = &keymap[layerNum];
+}
+
 // Set byte
 
-joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_t tresh, uint32_t* neutral){
-	enum joydir leftDir = categorizeJoy(left, tresh, neutral[0]);
-	enum joydir rightDir = categorizeJoy(right, tresh, neutral[1]);
+joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_t tresh){
+	*handle = 0; // Reset the bits of the state mask.
+
+	//TODO Redundant. Can use the joystick struct position.
+	enum joydir leftDir = categorizeJoy(left, tresh);
+	enum joydir rightDir = categorizeJoy(right, tresh);
+
 
 
 	switch(leftDir){
@@ -349,4 +425,6 @@ joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_
 	return handle;
 
 }
+
+
 

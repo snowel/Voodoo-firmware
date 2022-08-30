@@ -101,8 +101,19 @@ void ADC_Select_CH2 (void)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	joystick testStick;
-	uint32_t data[2]; // horz, nothing, vert, nothing -=_++_ test for now
+	joystick rightStick;
+	joystick leftStick;
+	int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
+			        0, 0, 0, 0,     0, 0, 0, 0};
+	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
+
+	joystate layerMask = 0;
+	Layer* layerHandle;
+
+	//Array of key pin states
+	uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
+	//uint32_t data[2]; // horz, nothing, vert, nothing -=_++_ test for now
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -128,8 +139,10 @@ int main(void)
   MX_ADC1_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  uint32_t tresh = 25000;
-  HAL_ADC_Start_DMA(&hadc1, data, 2);
+  uint16_t tresh = 600;
+  //HAL_ADC_Start_DMA(&hadc1, data, 2);
+
+
 
   /* USER CODE END 2 */
 
@@ -137,46 +150,26 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  ADC_Select_CH0();
-	  HAL_ADC_Start(&hadc1);
-	  HAL_ADC_PollForConversion(&hadc1, 1000);
-	  data[0] = HAL_ADC_GetValue(&hadc1);
-	  HAL_ADC_Stop(&hadc1);
+	  // check the layer
+	  readStick(&rightStick, ADC_Select_CH0, ADC_Select_CH2);
+	  readStick(&leftStick, ADC_Select_CH0, ADC_Select_CH2);
+	  setJoystate(&leftStick, &rightStick, layerMask, tresh);
+	  layerNumToRef(layerHandle, keymap, bitmaskToLayer(layerMask));
 
-	  if(data[0] < tresh){
-		      checkLayerTEST(); //I think the key to non-scancode functionality is going to be having non-scacode layes and then a selectiong of which while loop based on the layer/mode
-		  	  checkPins();
-		  	  scanKeys();
+	  // check pressed keys
+	  checkKeyPins(pinStates);
 
-	  } else {
-		  checkLayer(); //I think the key to non-scancode functionality is going to be having non-scacode layes and then a selectiong of which while loop based on the layer/mode
-		  checkPins();
-		  scanKeys();
+	  // check and set all keyboard related reports
+	  scanKeys(keymap, layerHandle, isHold, pinStates, kReport);
 
-	  }
+	  // send report
+	  USBD_HID_SendReport(&hUsbDeviceFS, &kReport, sizeof(kReport));
 
-	//  checkLayer(); //I think the key to non-scancode functionality is going to be having non-scacode layes and then a selectiong of which while loop based on the layer/mode
-	//  checkPins();
-	//  scanKeys();
-	  	/*  if(0 == HAL_GPIO_ReadPin(DasKey_GPIO_Port, DasKey_Pin)){//WHY is it reset here and set for the blink test???
-	  			switch (isHold[1]){
-	  			case 0:
-	  				setReport(1, pModLayer, pKeyLayer);
-	  				setHeld(1, layerNum);
-	  				break;
-	  			default:
-	  				//setReport(1, pModLayer, pKeyLayer);
-	  				setHeldReport(1);
-	  			}
+	  // clear report
+	  clearReport(kReport);
 
-	  		} else{
-				setHeld(1, 0);
-			}
-
-*/
-	  USBD_HID_SendReport(&hUsbDeviceFS, &HIDKeyboardReport, sizeof(HIDKeyboardReport));
-  	  clearReport();
-  	  HAL_Delay(4);
+	  // wait?
+  	  HAL_Delay(50);
 
     /* USER CODE END WHILE */
 
