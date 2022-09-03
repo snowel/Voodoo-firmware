@@ -83,11 +83,12 @@ uint8_t modKeyLayer4[] = {0, 0, 0, 0,     0, 0, 0, 0,
 uint8_t keyLayer4[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_N, KEY_E, KEY_I, KEY_O,
                        KEY_U, KEY_F, KEY_C, KEY_D,       KEY_H, KEY_M, KEY_L, KEY_W};
 // 5 = none left
+//imp space
 //L5 - imp space
 uint8_t impMod5 = 0;
 uint8_t impKey5 = KEY_SPACE;
 uint8_t modKeyLayer5[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	        	  0, 0, 0, 0,     0, 0, 0, 0};
+	        	          0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer5[] = {0, 0, 0, 0,     0, 0, 0, 0,
                        0, 0, 0, 0,     0, 0, 0, 0};
 
@@ -99,16 +100,19 @@ uint8_t modKeyLayer6[] = {             0, 0, 0, 0,     0, 0, 0, 0,
    KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, 0,     0, KEY_MOD_LALT, KEY_MOD_LSHIFT, KEY_MOD_LCTRL};
 uint8_t keyLayer6[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
                                     0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
+
+// could swap 5 and 1, 6 and 0
+
 // 7 = down down
 // WM (xmonad)
 uint8_t impMod7 = 0;
 uint8_t impKey7 = 0;
 uint8_t modKeyLayer7[] = {
 		          KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT + KEY_MOD_LALT, KEY_MOD_LSHIFT,
-	                  KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
+	            KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LALT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
 uint8_t keyLayer7[] = {
 			KEY_1, KEY_2, KEY_3, KEY_4,       KEY_H, KEY_BACKSPACE, KEY_ENTER, KEY_L,
-                            0, KEY_5, KEY_6, KEY_7,       KEY_P, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
+                0, KEY_5, KEY_6, KEY_7,       KEY_P, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
 
 // REF
 //                     [wksp 1] [wksp 2] [wkps 3] [wksp 4]

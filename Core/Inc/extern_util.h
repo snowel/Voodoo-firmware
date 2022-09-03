@@ -1,3 +1,5 @@
+#include "stm32f4xx.h"
+#include "usbd_def.h"
 #ifndef EXTERN_UTIL_H
 #define EXTERN_UTIL_H
 
@@ -12,9 +14,7 @@ typedef struct {
 	uint8_t K4;
 	uint8_t K5;
 	uint8_t K6;
-} keyboardHIDReport;
-
-extern keyboardHIDReport HIDKeyboardReport;
+}keyboardHIDReport;
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
