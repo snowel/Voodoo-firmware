@@ -71,7 +71,21 @@ void ADC_Select_CH0 (void)
 	  */
 	  sConfig.Channel = ADC_CHANNEL_0;
 	  sConfig.Rank = 1;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+}
+
+void ADC_Select_CH1 (void)
+{
+	ADC_ChannelConfTypeDef sConfig = {0};
+	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+	  */
+	  sConfig.Channel = ADC_CHANNEL_1;
+	  sConfig.Rank = 2;
+	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
 	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
 	  {
 	    Error_Handler();
@@ -84,8 +98,22 @@ void ADC_Select_CH2 (void)
 	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
 	  */
 	  sConfig.Channel = ADC_CHANNEL_2;
-	  sConfig.Rank = 1;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+	  sConfig.Rank = 3;
+	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+}
+
+void ADC_Select_CH3 (void)
+{
+	ADC_ChannelConfTypeDef sConfig = {0};
+	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+	  */
+	  sConfig.Channel = ADC_CHANNEL_0;
+	  sConfig.Rank = 4;
+	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
 	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
 	  {
 	    Error_Handler();
@@ -151,16 +179,16 @@ int main(void)
   while (1)
   {
 	  // check the layer
-	  readStick(&rightStick, ADC_Select_CH0, ADC_Select_CH2);
-	  readStick(&leftStick, ADC_Select_CH0, ADC_Select_CH2);
-	  setJoystate(&leftStick, &rightStick, layerMask, tresh);
-	  layerNumToRef(layerHandle, keymap, bitmaskToLayer(layerMask));
+	  readStick(&rightStick, ADC_Select_CH1, ADC_Select_CH3);
+	  //readStick(&leftStick, ADC_Select_CH0, ADC_Select_CH2);
+	  setJoystate(&leftStick, &rightStick, layerMask, &tresh);
+	  layerNumToRef(layerHandle, &keymap[0], bitmaskToLayer(layerMask));
 
 	  // check pressed keys
-	  checkKeyPins(pinStates);
+	  checkKeyPins(&pinStates[0]);
 
 	  // check and set all keyboard related reports
-	  scanKeys(keymap, layerHandle, isHold, pinStates, kReport);
+	  scanKeys(&keymap[0], layerHandle, isHold, pinStates, kReport);
 
 	  // send report
 	  USBD_HID_SendReport(&hUsbDeviceFS, &kReport, sizeof(kReport));
@@ -252,7 +280,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_LEFT;
-  hadc1.Init.NbrOfConversion = 2;
+  hadc1.Init.NbrOfConversion = 4;
   hadc1.Init.DMAContinuousRequests = DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
@@ -260,8 +288,6 @@ static void MX_ADC1_Init(void)
     Error_Handler();
   }
 
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-  */
 
   /* USER CODE BEGIN ADC1_Init 2 */
 
@@ -279,41 +305,24 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin : PC13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PA4 PA5 PA6 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PA7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  /*Configure GPIO pins : PA4 PA5 PA6 PA7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB0 PB1 PB2 PB10
-                           PB15 PB3 PB4 PB5
+                           PB13 PB15 PB4 PB5
                            PB6 PB7 PB8 PB9 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10
-                          |GPIO_PIN_15|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5
+                          |GPIO_PIN_13|GPIO_PIN_15|GPIO_PIN_4|GPIO_PIN_5
                           |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }

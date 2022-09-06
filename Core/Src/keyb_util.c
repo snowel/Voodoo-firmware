@@ -4,13 +4,22 @@
 
 //Init the pin array
 void checkKeyPins(uint8_t* keyRef){
-	keyRef[0] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
-	//pinStates[1] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
-	//pinStates[2] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
-	//pinStates[3] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
-	//pinStates[4] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
-	//pinStates[5] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
-	//pinStates[6] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_3);
+	keyRef[4] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
+	keyRef[5] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5);
+	keyRef[6] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
+	keyRef[7] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
+	keyRef[12] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);
+	keyRef[13] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
+	keyRef[14] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2);
+	keyRef[15] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15);
+	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13);
+
 }
 
 
