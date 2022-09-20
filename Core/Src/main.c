@@ -27,6 +27,7 @@
 #include "keyb_util.h"
 #include <extern_util.h>
 #include "layer_util.h"
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -46,6 +47,7 @@
 
 /* Private variables ---------------------------------------------------------*/
  ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
 
 /* USER CODE BEGIN PV */
 
@@ -54,6 +56,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -62,63 +65,6 @@ static void MX_ADC1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-//Commented out because in extern_util.h
-//extern USBD_HandleTypeDef hUsbDeviceFS;
-void ADC_Select_CH0 (void)
-{
-	ADC_ChannelConfTypeDef sConfig = {0};
-	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-	  */
-	  sConfig.Channel = ADC_CHANNEL_0;
-	  sConfig.Rank = 1;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-}
-
-void ADC_Select_CH1 (void)
-{
-	ADC_ChannelConfTypeDef sConfig = {0};
-	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-	  */
-	  sConfig.Channel = ADC_CHANNEL_1;
-	  sConfig.Rank = 2;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-}
-
-void ADC_Select_CH2 (void)
-{
-	ADC_ChannelConfTypeDef sConfig = {0};
-	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-	  */
-	  sConfig.Channel = ADC_CHANNEL_2;
-	  sConfig.Rank = 3;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-}
-
-void ADC_Select_CH3 (void)
-{
-	ADC_ChannelConfTypeDef sConfig = {0};
-	  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-	  */
-	  sConfig.Channel = ADC_CHANNEL_0;
-	  sConfig.Rank = 4;
-	  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-}
 
 /* USER CODE END 0 */
 
@@ -129,19 +75,7 @@ void ADC_Select_CH3 (void)
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	joystick rightStick;
-	joystick leftStick;
-	int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
-			        0, 0, 0, 0,     0, 0, 0, 0};
-	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
 
-	joystate layerMask = 0;
-	Layer* layerHandle;
-
-	//Array of key pin states
-	uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-
-	//uint32_t data[2]; // horz, nothing, vert, nothing -=_++_ test for now
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -164,11 +98,34 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC1_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  uint16_t tresh = 600;
-  //HAL_ADC_Start_DMA(&hadc1, data, 2);
+	uint32_t analogIn[4];
+
+
+	joystick rightStick;
+	joystick leftStick;
+
+	// Set the pointer to the appropriate elem of the array.
+	rightStick.xAxis = &analogIn[0];
+	rightStick.yAxis = &analogIn[2];
+	leftStick.xAxis = &analogIn[1];
+	leftStick.yAxis = &analogIn[3];
+
+
+	joystate layerMask = 0;
+	Layer* layerHandle;
+
+	//Array of key pin states
+	uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
+			        0, 0, 0, 0,     0, 0, 0, 0};
+	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
+
+  uint32_t tresh = 600;
+
 
 
 
@@ -178,10 +135,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // check the layer
-	  readStick(&rightStick, ADC_Select_CH1, ADC_Select_CH3);
-	  //readStick(&leftStick, ADC_Select_CH0, ADC_Select_CH2);
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+	  // Start the DMA (?)Not sure why it doesn't run when inited outside the while (1)
+	  HAL_ADC_Start_DMA(&hadc1, analogIn, 4);
+
+	  // Set the layer mask to the appropraite id
 	  setJoystate(&leftStick, &rightStick, layerMask, &tresh);
+
+	  // Get the pointer handle updated with the current active layer
 	  layerNumToRef(layerHandle, &keymap[0], bitmaskToLayer(layerMask));
 
 	  // check pressed keys
@@ -197,11 +160,8 @@ int main(void)
 	  clearReport(kReport);
 
 	  // wait?
-  	  HAL_Delay(50);
+  	  HAL_Delay(100);
 
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -272,26 +232,77 @@ static void MX_ADC1_Init(void)
   /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.ScanConvMode = ENABLE;
   hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_LEFT;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.NbrOfConversion = 4;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.DMAContinuousRequests = ENABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
     Error_Handler();
   }
 
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_0;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = 2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = 3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = 4;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
 
 }
 

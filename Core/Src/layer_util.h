@@ -23,10 +23,10 @@ enum joydir {
 
 //struct for joystick states
 typedef struct joystick{
-	uint16_t yAxis;
-	uint16_t xAxis;
-	uint16_t xNeutral;
-	uint16_t yNeutral;
+	uint32_t* yAxis;
+	uint32_t* xAxis;
+	uint32_t xNeutral;
+	uint32_t yNeutral;
 	uint8_t xPolarity; // 0 = Resistance decress (reading incresess) to the right; 1 = Resistance decresses to the left.
 	uint8_t yPolarity; // 0 = Resistance decresses to the top; 1 = ressistance decresses towards the bottom
 	enum joydir position;
@@ -50,44 +50,23 @@ joystick rightStick;
 
 //}
 
-void readStick(joystick* stick, void (*xChan)(void), void (*yChan)(void)){
-	uint16_t currentX;
-	uint16_t currentY;
 
-	 (*xChan);
-	 HAL_ADC_Start(&hadc1);
-	 HAL_ADC_PollForConversion(&hadc1, 1000);
-     currentX = HAL_ADC_GetValue(&hadc1);
-	 HAL_ADC_Stop(&hadc1);
+enum joydir categorizeJoy(joystick* stick, uint32_t tresh){
 
-	 (*yChan);
-	 HAL_ADC_Start(&hadc1);
-	 HAL_ADC_PollForConversion(&hadc1, 1000);
-     currentY = HAL_ADC_GetValue(&hadc1);
-	 HAL_ADC_Stop(&hadc1);
-
-	stick->xAxis = currentX;
-	stick->yAxis = currentY;
-
-}
-
-
-enum joydir categorizeJoy(joystick* stick, uint16_t tresh){
-
-	int16_t xDif;
-	int16_t yDif;
+	int32_t xDif;
+	int32_t yDif;
 
 	// Substract the neutral and position for the sign to match cartesian convention
 	if(stick->xPolarity == 0) {
-		xDif = (int16_t)stick->xAxis - stick->xNeutral;
+		xDif = *(stick->xAxis) - stick->xNeutral;
 	} else {
-		xDif = (int16_t)stick->xNeutral - stick->xAxis;
+		xDif = stick->xNeutral - *(stick->xAxis);
 	}
 
 	if(stick->yPolarity == 0) {
-	    yDif = (int16_t)stick->yAxis - stick->yNeutral;
+	    yDif = *(stick->yAxis) - stick->yNeutral;
 	} else {
-		yDif = (int16_t)stick->xNeutral - stick->xAxis;
+		yDif = stick->xNeutral - *(stick->xAxis);
 	}
 
 

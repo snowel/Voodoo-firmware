@@ -2,23 +2,25 @@
 
 
 
-//Init the pin array
+// Update the key-press array.
+// This is where the keys "index" is determined.
 void checkKeyPins(uint8_t* keyRef){
+	keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13);
+	keyRef[1] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15);
+	keyRef[2] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
+	keyRef[3] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
+	keyRef[8] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
+	keyRef[9] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
+	keyRef[10] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
+	keyRef[11] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
 	keyRef[4] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
 	keyRef[5] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5);
 	keyRef[6] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
 	keyRef[7] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
 	keyRef[12] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);
 	keyRef[13] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
-	keyRef[14] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2);
+	//keyRef[14] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2); -- Hard-fault culprit
 	keyRef[15] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15);
-	//keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13);
 
 }
 
