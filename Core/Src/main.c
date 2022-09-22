@@ -56,8 +56,8 @@ DMA_HandleTypeDef hdma_adc1;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_DMA_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_DMA_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -93,13 +93,13 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
-
+|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_ADC1_Init();
+  MX_DMA_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 	uint32_t analogIn[4];
@@ -111,22 +111,28 @@ int main(void)
 	// Set the pointer to the appropriate elem of the array.
 	rightStick.xAxis = &analogIn[0];
 	rightStick.yAxis = &analogIn[2];
+	rightStick.xNeutral = 2000;
+	rightStick.yNeutral = 2000;
+
 	leftStick.xAxis = &analogIn[1];
 	leftStick.yAxis = &analogIn[3];
-
+	leftStick.xNeutral = 2000;
+	leftStick.yNeutral = 2000;
 
 	joystate layerMask = 0;
-	Layer* layerHandle;
+	Layer* layerHandle = keymap[1];
 
 	//Array of key pin states
 	uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 	int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
 			        0, 0, 0, 0,     0, 0, 0, 0};
 	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
+	keyboardHIDReport* pReport = &kReport;
 
   uint32_t tresh = 600;
 
-
+// debug
+  uint32_t debugCodes[4];
 
 
   /* USER CODE END 2 */
@@ -142,19 +148,19 @@ int main(void)
 	  HAL_ADC_Start_DMA(&hadc1, analogIn, 4);
 
 	  // Set the layer mask to the appropraite id
-	  setJoystate(&leftStick, &rightStick, layerMask, &tresh);
+	  setJoystate(&leftStick, &rightStick, &layerMask, tresh);
 
 	  // Get the pointer handle updated with the current active layer
-	  layerNumToRef(layerHandle, &keymap[0], bitmaskToLayer(layerMask));
+	  layerNumToRef(layerHandle, keymap[0], bitmaskToLayer(layerMask));
 
 	  // check pressed keys
 	  checkKeyPins(&pinStates[0]);
 
 	  // check and set all keyboard related reports
-	  scanKeys(&keymap[0], layerHandle, isHold, pinStates, kReport);
+	  scanKeys(keymap[0], layerHandle, isHold, pinStates, pReport);
 
 	  // send report
-	  USBD_HID_SendReport(&hUsbDeviceFS, &kReport, sizeof(kReport));
+	  USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
 
 	  // clear report
 	  clearReport(kReport);
@@ -162,6 +168,8 @@ int main(void)
 	  // wait?
   	  HAL_Delay(100);
 
+
+  	  setReportDebug(0, layerHandle, &debugCodes[0], debugCodes[1], debugCodes[2], &debugCodes[3]);
   }
   /* USER CODE END 3 */
 }

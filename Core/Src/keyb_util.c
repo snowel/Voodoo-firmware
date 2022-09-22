@@ -5,6 +5,7 @@
 // Update the key-press array.
 // This is where the keys "index" is determined.
 void checkKeyPins(uint8_t* keyRef){
+	keyRef[4] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
 	keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13);
 	keyRef[1] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15);
 	keyRef[2] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
@@ -13,7 +14,6 @@ void checkKeyPins(uint8_t* keyRef){
 	keyRef[9] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
 	keyRef[10] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
 	keyRef[11] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
-	keyRef[4] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
 	keyRef[5] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5);
 	keyRef[6] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
 	keyRef[7] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
@@ -21,46 +21,52 @@ void checkKeyPins(uint8_t* keyRef){
 	keyRef[13] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
 	//keyRef[14] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2); -- Hard-fault culprit
 	keyRef[15] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
-
 }
 
 
-void setModByte(uint8_t* code, keyboardHIDReport report){
-	report.MOD = report.MOD | *code;
+void setModByte(uint8_t* code, keyboardHIDReport* report){
+	report->MOD = report->MOD | *code;
 }
 
-void setKeyBytes(uint8_t* code, keyboardHIDReport keyboardReport){
-	if(keyboardReport.K1 == 0){
-		keyboardReport.K1 = *code;
-	} else if(keyboardReport.K2 == 0){
-		keyboardReport.K2 = *code;
-	} else if(keyboardReport.K3 == 0){
-		keyboardReport.K3 = *code;
-	} else if(keyboardReport.K4 == 0){
-		keyboardReport.K4 = *code;
-	} else if(keyboardReport.K5 == 0){
-		keyboardReport.K5 = *code;
-	} else if(keyboardReport.K6 == 0){
-		keyboardReport.K6 = *code;
+void setKeyBytes(uint8_t* code, keyboardHIDReport* keyboardReport){
+	if(keyboardReport->K1 == 0){
+		keyboardReport->K1 = *code;
+	} else if(keyboardReport->K2 == 0){
+		keyboardReport->K2 = *code;
+	} else if(keyboardReport->K3 == 0){
+		keyboardReport->K3 = *code;
+	} else if(keyboardReport->K4 == 0){
+		keyboardReport->K4 = *code;
+	} else if(keyboardReport->K5 == 0){
+		keyboardReport->K5 = *code;
+	} else if(keyboardReport->K6 == 0){
+		keyboardReport->K6 = *code;
 	}
 }
 
 //TODO physical vs imp priority could be configurable
-void setReport(int keypress, Layer* layer, keyboardHIDReport keyboardReport){
+void setReport(int keypress, Layer* layer, keyboardHIDReport* keyboardReport){
+	// Temporary data store
+	uint8_t * impModcode = layer->impMod;
+	uint8_t * impKeycode = layer->impKey;
+	uint8_t * modcode = layer->pModLayer + keypress;
+	uint8_t * keycode = layer->pKeyLayer + keypress;
+
+	setKeyBytes(keycode, keyboardReport);
+	setModByte(modcode, keyboardReport);
+	setKeyBytes(impModcode, keyboardReport);
+	setModByte(impKeycode, keyboardReport);
+}
+void setReportDebug(int keypress, Layer* layer, uint32_t* impmod, uint32_t impkey, uint32_t mod, uint32_t* key){
 	// Imp key
 	uint8_t * modcode = layer->impMod;
 	uint8_t * keycode = layer->impKey;
-
-	setKeyBytes(keycode, keyboardReport);
-	setModByte(modcode, keyboardReport);
-
-	// Physical key
-	modcode = layer->pModLayer + keypress; // TODO implications of pModLayer[keypress] auto dereference rather than using a pointer?
-	keycode = layer->pKeyLayer + keypress;
-
-	setKeyBytes(keycode, keyboardReport);
-	setModByte(modcode, keyboardReport);
-
+	*impmod = (uint32_t)*modcode;
+	impkey = (uint32_t)*keycode;
+	modcode = layer->pModLayer; // TODO implications of pModLayer[keypress] auto dereference rather than using a pointer?
+	keycode = layer->pKeyLayer;
+	mod = (uint32_t)modcode[keypress];// value doesn't update this way
+	*key = (uint32_t)keycode[keypress];
 }
 
 /*old
@@ -79,9 +85,9 @@ void setHeld(int keypress, int layerNumber, int* heldRef){
 	heldRef[keypress] = layerNumber;
 }
 
-void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport keyboardReport){
+void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport* keyboardReport){
 	Layer* heldKeyLayer = &keymap[heldRef[keypress]];
-	//if isHold[0] then the key is not held, else it's the numebr of the layer it was pressed down in
+	//if isHold[i] == 0 then the i key is not held, else it's the numebr of the layer it was pressed down in
 
 	setReport(keypress, heldKeyLayer, keyboardReport);
 
@@ -110,11 +116,11 @@ void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport 
 }
  * */
 
-void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyRef, keyboardHIDReport report){
+void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, keyboardHIDReport* report){
 	int i;
 	for(i = 0; i < NUMBER_OF_KEYS; i++){
 		//Original if condition was: GPIO_PIN_RESET == HAL_GPIO_ReadPin(keyPorts[i]/, keyPins[i])
-		if(keyRef[i] == 0){
+		if(keyStates[i] == 0){
 			switch(heldRef[i]){
 			case 0: setReport(i, layerRef, report);
 					setHeld(i, layerRef->layerNum, heldRef);

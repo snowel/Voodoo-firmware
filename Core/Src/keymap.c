@@ -256,15 +256,14 @@ uint8_t impKey23 = KEY_SPACE;
 uint8_t modKeyLayer23[] = {0, 0, 0, 0,     0, 0, 0, 0,
 	        			  0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer23[] = {0, 0, 0, 0,     0, 0, 0, 0,
-                       0, 0, 0, 0,     0, 0, 0, 0};
+                        0, 0, 0, 0,     0, 0, 0, 0};
 
 // 24 = left up
 // Function 1-16
 uint8_t impMod24 = 0;
 uint8_t impKey24 = 0;
-uint8_t modKeyLayer24[] = {    0, 0, 0, 0,     0, 0, 0, 0,
-	                      0, 0, 0, 0,     0, 0, 0, 0
-			};
+uint8_t modKeyLayer24[] = {0, 0, 0, 0,     0, 0, 0, 0,
+	                       0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer24[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4,       KEY_F5, KEY_F6, KEY_F7, KEY_F8,
                        KEY_F9, KEY_F10, KEY_F11, KEY_F12,       KEY_F13, KEY_F14, KEY_F15, KEY_F16};
 // 25 = left left

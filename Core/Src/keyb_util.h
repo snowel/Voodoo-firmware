@@ -36,7 +36,7 @@ extern keyboardHIDReport kReport;
 
 
 
-void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyRef, keyboardHIDReport report);
+void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyRef, keyboardHIDReport* report);
 
 // scan function for keyboard settings i.e. swtichingmouse mode
 
