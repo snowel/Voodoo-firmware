@@ -86,7 +86,7 @@ void setHeld(int keypress, int layerNumber, int* heldRef){
 }
 
 void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport* keyboardReport){
-	Layer* heldKeyLayer = &keymap[heldRef[keypress]];
+	Layer* heldKeyLayer = &(keymap[heldRef[keypress]]);
 	//if isHold[i] == 0 then the i key is not held, else it's the numebr of the layer it was pressed down in
 
 	setReport(keypress, heldKeyLayer, keyboardReport);
@@ -117,8 +117,7 @@ void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport*
  * */
 
 void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, keyboardHIDReport* report){
-	int i;
-	for(i = 0; i < NUMBER_OF_KEYS; i++){
+	for(int i = 0; i < NUMBER_OF_KEYS; i++){
 		//Original if condition was: GPIO_PIN_RESET == HAL_GPIO_ReadPin(keyPorts[i]/, keyPins[i])
 		if(keyStates[i] == 0){
 			switch(heldRef[i]){
@@ -129,7 +128,7 @@ void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, 
 				break;
 			}
 
-		} else {// add a check? : else if (isHold[1] != 0) {} ?? not sure what's best practice
+		} else {// TODO add a check?
 			setHeld(i, 0, heldRef);
 		}
 	}
@@ -139,12 +138,12 @@ void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, 
 
 // scan for thumb-stick keys, so scans held, but sets the report to a prebuilt report mapped tot hat layer... technically with that the layer could still function normally... for mod keys... probbaly a more elegant solution for most cases... but I do like the manual mod map
 
-void clearReport(keyboardHIDReport keyboardReport){
-	keyboardReport.MOD = 0;
-	keyboardReport.K1 = 0;
-	keyboardReport.K2 = 0;
-	keyboardReport.K3 = 0;
-	keyboardReport.K4 = 0;
-	keyboardReport.K5 = 0;
-	keyboardReport.K6 = 0;
+void clearReport(keyboardHIDReport* keyboardReport){
+	keyboardReport->MOD = 0;
+	keyboardReport->K1 = 0;
+	keyboardReport->K2 = 0;
+	keyboardReport->K3 = 0;
+	keyboardReport->K4 = 0;
+	keyboardReport->K5 = 0;
+	keyboardReport->K6 = 0;
 }

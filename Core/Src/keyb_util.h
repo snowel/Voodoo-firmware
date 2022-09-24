@@ -32,7 +32,7 @@ uint16_t keyboardReportSize = sizeof(HIDKeyboardReport);
 */
 
 
-extern keyboardHIDReport kReport;
+//extern keyboardHIDReport kReport;
 
 
 
@@ -42,5 +42,6 @@ void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyRef, key
 
 // scan for thumb-stick keys, so scans held, but sets the report to a prebuilt report mapped tot hat layer... technically with that the layer could still function normally... for mod keys... probbaly a more elegant solution for most cases... but I do like the manual mod map
 
-void clearReport(keyboardHIDReport keyboardReport);
+// Clear the Keyboard HID report (set all values to 0)
+void clearReport(keyboardHIDReport* keyboardReport);
 #endif

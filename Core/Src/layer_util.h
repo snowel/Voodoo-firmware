@@ -73,7 +73,7 @@ enum joydir categorizeJoy(joystick* stick, uint32_t tresh){
 	int xMag = abs(xDif);
 	int yMag = abs(yDif);
 
-	if(xMag <= tresh || yMag <= tresh){
+	if(xMag <= tresh && yMag <= tresh){
 		stick->position = CENTERWISE;
 		return CENTERWISE; //Stick not directed
 	}
@@ -217,6 +217,8 @@ void testMain(joystick* stick){
 // bit 1 - 2 : right-right
 // bit 0 - 1 : rigth-down
 
+// Layer byteIDs
+
 #define LAYER_1_ID 0// 1 = none none - 0 + 0
 #define LAYER_2_ID 1// 2 = none down - 0 + 1
 #define LAYER_3_ID 2// 3 = none right - 0 + 2
@@ -243,6 +245,7 @@ void testMain(joystick* stick){
 #define LAYER_24_ID 132  // 24 = left up
 #define LAYER_25_ID 136  // 25 = left left 128 + 8
 
+// Stick-position byteID components
 
 #define LEFT_JOY_LEFT 0x80
 #define LEFT_JOY_UP 0x40
@@ -252,7 +255,8 @@ void testMain(joystick* stick){
 #define RIGHT_JOY_LEFT 0x08
 #define RIGHT_JOY_UP 0x04
 #define RIGHT_JOY_RIGHT 0x02
-#define RIGHT_JOY_DOWN 0x01 // A more gneric but confusing way would be to have the directions be 1, 2, 4, 8 and then bitwise shift for the position of every stick
+#define RIGHT_JOY_DOWN 0x01
+// A more generic but confusing way would be to have the directions be 1, 2, 4, 8 and then bitwise shift for the position of every stick
 
 #define LEFT_JOY_LEFT_TRESH 0x80
 #define LEFT_JOY_UP_TRESH 0x40
@@ -273,8 +277,7 @@ enum joyhandedness {
 	LEFT_JOY
 };
 
-// switch case with 25 cases
-
+// byte ID to layer number
 int bitmaskToLayer(uint8_t bitmask){
 	switch (bitmask) {
 		case LAYER_1_ID :
@@ -353,11 +356,12 @@ int bitmaskToLayer(uint8_t bitmask){
 			return 25;
 			break;
 	}
+	return -1; // ERROR
 }
 
 // Set's layer
 void layerNumToRef(Layer* layerHandle, Layer* keymap, int layerNum){
-	layerHandle = &keymap[layerNum];
+	layerHandle = &(keymap[layerNum]);
 }
 
 // Set byte
@@ -404,6 +408,3 @@ joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_
 	return handle;
 
 }
-
-
-

@@ -93,7 +93,6 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
 
-|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}|}
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -102,34 +101,45 @@ int main(void)
   MX_DMA_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
+
+  	// DMA BUFF
 	uint32_t analogIn[4];
 
 
-	joystick rightStick;
-	joystick leftStick;
+	// Init and configure the joysticks.
 
-	// Set the pointer to the appropriate elem of the array.
-	rightStick.xAxis = &analogIn[0];
+	joystick rightStick;
+	rightStick.xAxis = &analogIn[0];// joystick structs point directly to the buffer data
 	rightStick.yAxis = &analogIn[2];
 	rightStick.xNeutral = 2000;
 	rightStick.yNeutral = 2000;
 
+	joystick leftStick;
 	leftStick.xAxis = &analogIn[1];
 	leftStick.yAxis = &analogIn[3];
 	leftStick.xNeutral = 2000;
 	leftStick.yNeutral = 2000;
 
-	joystate layerMask = 0;
-	Layer* layerHandle = keymap[1];
+	// Joystick threshold, fornow uniform. TODO granular struct
+	uint32_t tresh = 600;
 
-	//Array of key pin states
-	uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-	int isHold[] = {0, 0, 0, 0,     0, 0, 0, 0,
-			        0, 0, 0, 0,     0, 0, 0, 0};
+	// Init Layer byteID and active layer handle
+
+	joystate layerByteID = 0;
+	Layer* layerHandle = keymap[1];
+	//laery 3 harfautls layer 1 does not...
+
+	// Array of key and pin states
+
+	uint8_t pinStates[NUMBER_OF_KEYS] = {1, 1, 1, 1,     1, 1, 1, 1,
+			                             1, 1, 1, 1,     1, 1, 1, 1};
+	int isHold[NUMBER_OF_KEYS] = {0, 0, 0, 0,     0, 0, 0, 0,
+			                      0, 0, 0, 0,     0, 0, 0, 0};
+	// Keyboard HID report
+
 	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
 	keyboardHIDReport* pReport = &kReport;
 
-  uint32_t tresh = 600;
 
 // debug
   uint32_t debugCodes[4];
@@ -148,28 +158,27 @@ int main(void)
 	  HAL_ADC_Start_DMA(&hadc1, analogIn, 4);
 
 	  // Set the layer mask to the appropraite id
-	  setJoystate(&leftStick, &rightStick, &layerMask, tresh);
+	  setJoystate(&leftStick, &rightStick, &layerByteID, tresh);
 
 	  // Get the pointer handle updated with the current active layer
-	  layerNumToRef(layerHandle, keymap[0], bitmaskToLayer(layerMask));
+	  //layerNumToRef(layerHandle, keymap[0], 1);//DEBUG hardcoded q
 
 	  // check pressed keys
 	  checkKeyPins(&pinStates[0]);
 
 	  // check and set all keyboard related reports
-	  scanKeys(keymap[0], layerHandle, isHold, pinStates, pReport);
+	  //Seems to work until using keymap[0]as the starting point???
+	  scanKeys(keymap[0], layerHandle, &isHold[0], pinStates, pReport);
 
 	  // send report
-	  USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
-
+	  //USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
+  	  HAL_Delay(100);
 	  // clear report
-	  clearReport(kReport);
+	  clearReport(pReport);
 
 	  // wait?
-  	  HAL_Delay(100);
 
 
-  	  setReportDebug(0, layerHandle, &debugCodes[0], debugCodes[1], debugCodes[2], &debugCodes[3]);
   }
   /* USER CODE END 3 */
 }
