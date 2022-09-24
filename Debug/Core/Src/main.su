@@ -2,7 +2,7 @@
 ../Core/Src/layer_util.h:281:5:bitmaskToLayer	16	static
 ../Core/Src/layer_util.h:363:6:layerNumToRef	24	static
 ../Core/Src/layer_util.h:369:11:setJoystate	32	static
-../Core/Src/main.c:75:5:main	200	static
+../Core/Src/main.c:75:5:main	192	static
 ../Core/Src/main.c:190:6:SystemClock_Config	88	static
 ../Core/Src/main.c:236:13:MX_ADC1_Init	24	static
 ../Core/Src/main.c:313:13:MX_DMA_Init	16	static

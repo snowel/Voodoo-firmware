@@ -4,6 +4,6 @@
 ../Core/Src/keyb_util.c:48:6:setReport	40	static
 ../Core/Src/keyb_util.c:60:6:setReportDebug	32	static
 ../Core/Src/keyb_util.c:84:6:setHeld	24	static
-../Core/Src/keyb_util.c:88:6:setHeldReport	32	static
-../Core/Src/keyb_util.c:119:6:scanKeys	32	static
-../Core/Src/keyb_util.c:141:6:clearReport	16	static
+../Core/Src/keyb_util.c:90:6:setHeldReport	32	static
+../Core/Src/keyb_util.c:121:6:scanKeys	32	static
+../Core/Src/keyb_util.c:143:6:clearReport	16	static

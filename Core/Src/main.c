@@ -127,6 +127,7 @@ int main(void)
 
 	joystate layerByteID = 0;
 	Layer* layerHandle = keymap[1];
+	const Layer** keymapRef = &keymap[0];
 	//laery 3 harfautls layer 1 does not...
 
 	// Array of key and pin states
@@ -140,9 +141,7 @@ int main(void)
 	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
 	keyboardHIDReport* pReport = &kReport;
 
-
-// debug
-  uint32_t debugCodes[4];
+	//DEBUG
 
 
   /* USER CODE END 2 */
@@ -166,9 +165,9 @@ int main(void)
 	  // check pressed keys
 	  checkKeyPins(&pinStates[0]);
 
-	  // check and set all keyboard related reports
-	  //Seems to work until using keymap[0]as the starting point???
-	  scanKeys(keymap[0], layerHandle, &isHold[0], pinStates, pReport);
+	  // Check and set all keyboard related reports
+	  // Seems to work until using keymap[0]as the starting point???
+	  scanKeys(keymapRef, layerHandle, &isHold[0], pinStates, pReport);
 
 	  // send report
 	  //USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
@@ -177,6 +176,7 @@ int main(void)
 	  clearReport(pReport);
 
 	  // wait?
+	  //Temp moved to read the report
 
 
   }

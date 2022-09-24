@@ -85,11 +85,13 @@ void setHeld(int keypress, int layerNumber, int* heldRef){
 	heldRef[keypress] = layerNumber;
 }
 
-void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport* keyboardReport){
-	Layer* heldKeyLayer = &(keymap[heldRef[keypress]]);
+
+// TODO setHeldReport could be simplified by using: Layer* helpRef[], so that the held keys automatically know which layer to use... In fact there wouldn't be a need for setHeldReport.
+void setHeldReport(int keyIndex, const Layer** keymap, int* heldRef, keyboardHIDReport* keyboardReport){
+	Layer* heldKeyLayer = keymap[heldRef[keyIndex]];
 	//if isHold[i] == 0 then the i key is not held, else it's the numebr of the layer it was pressed down in
 
-	setReport(keypress, heldKeyLayer, keyboardReport);
+	setReport(keyIndex, heldKeyLayer, keyboardReport);
 
 }
 
@@ -116,7 +118,7 @@ void setHeldReport(int keypress, Layer* keymap, int* heldRef, keyboardHIDReport*
 }
  * */
 
-void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, keyboardHIDReport* report){
+void scanKeys(const Layer** keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, keyboardHIDReport* report){
 	for(int i = 0; i < NUMBER_OF_KEYS; i++){
 		//Original if condition was: GPIO_PIN_RESET == HAL_GPIO_ReadPin(keyPorts[i]/, keyPins[i])
 		if(keyStates[i] == 0){

@@ -47,17 +47,15 @@ uint8_t impMod1 = 0;
 uint8_t impKey1 = 0;
 
 uint8_t modKeyLayer1[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	                  0, 0, 0, 0,     0, 0, 0, 0};
+	                      0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer1[] = {KEY_A, KEY_S, KEY_R, KEY_T,       KEY_N, KEY_E, KEY_I, KEY_O,
                        KEY_U, KEY_F, KEY_C, KEY_D,       KEY_H, KEY_M, KEY_L, KEY_W};
 // 2 = none down
 // CIRCUFIRENTIAL SYMBOLS
 uint8_t impMod2 = 0;
 uint8_t impKey2 = 0;
-uint8_t modKeyLayer2[] = {
-		     		  0, 0, 0, KEY_MOD_LSHIFT,     0, 0, KEY_MOD_LSHIFT, 0,
-	             0, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT
-			};
+uint8_t modKeyLayer2[] = {0, 0, 0, KEY_MOD_LSHIFT,     0, 0, KEY_MOD_LSHIFT, 0,
+	         0, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0,     KEY_MOD_LSHIFT, 0, 0, KEY_MOD_LSHIFT};
 uint8_t keyLayer2[] = {KEY_Z, KEY_TAB, KEY_EQUAL, KEY_GRAVE,       KEY_SLASH, KEY_MINUS, KEY_ENTER, KEY_BACKSLASH,
                        KEY_U, KEY_F, KEY_EQUAL, KEY_GRAVE,       KEY_COMMA, KEY_LEFTBRACE, KEY_RIGHTBRACE, KEY_BACKSLASH};
 
@@ -157,7 +155,7 @@ uint8_t keyLayer11[] = {KEY_Q, KEY_K, KEY_Y, KEY_B,       KEY_P, KEY_SEMICOLON, 
 uint8_t impMod12 = 0;
 uint8_t impKey12 = 0;
 uint8_t modKeyLayer12[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	       		   0, 0, 0, 0,     0, 0, 0, 0};
+	       		           0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer12[] = {0, 0, 0, 0,     0, 0, 0, 0,
                         0, 0, 0, 0,     0, 0, 0, 0};
 
@@ -181,7 +179,7 @@ uint8_t keyLayer14[] = {KEY_Q, KEY_K, KEY_Y, KEY_B,       KEY_P, KEY_SEMICOLON, 
 uint8_t impMod15 = 0;
 uint8_t impKey15 = KEY_SPACE;
 uint8_t modKeyLayer15[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	               	   0, 0, 0, 0,     0, 0, 0, 0};
+	               	       0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer15[] = {0, 0, 0, 0,     0, 0, 0, 0,
                         0, 0, 0, 0,     0, 0, 0, 0};
 
@@ -199,13 +197,13 @@ uint8_t impKey17 = KEY_SPACE;
 uint8_t modKeyLayer17[] = {0, 0, 0, 0,     0, 0, 0, 0,
 	        			  0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer17[] = {0, 0, 0, 0,     0, 0, 0, 0,
-                       0, 0, 0, 0,     0, 0, 0, 0};
+                        0, 0, 0, 0,     0, 0, 0, 0};
 
 // 18 = up right
 uint8_t impMod18 = 0;
 uint8_t impKey18 = KEY_SPACE;
 uint8_t modKeyLayer18[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	         	   0, 0, 0, 0,     0, 0, 0, 0};
+	         	           0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer18[] = {0, 0, 0, 0,     0, 0, 0, 0,
                         0, 0, 0, 0,     0, 0, 0, 0};
 
@@ -215,7 +213,7 @@ uint8_t impMod19 = 0;
 uint8_t impKey19 = 0;
 uint8_t modKeyLayer19[] = {
 		          KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_LCTRL, 0, KEY_MOD_LSHIFT + KEY_MOD_LALT, KEY_MOD_LSHIFT,
-	                  KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
+	              KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LALT, KEY_MOD_LALT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, 0, KEY_MOD_LSHIFT};
 uint8_t keyLayer19[] = {
 			KEY_1, KEY_2, KEY_3, KEY_4,       KEY_SPACE, KEY_N, KEY_ENTER, KEY_L,
                             0, KEY_5, KEY_6, KEY_7,       KEY_1, KEY_SLASH, KEY_ENTER, KEY_BACKSLASH};
@@ -236,7 +234,7 @@ uint8_t keyLayer20[] = {0, 0, 0, 0,     0, 0, 0, 0,
 uint8_t impMod21 = 0;
 uint8_t impKey21 = 0;
 uint8_t modKeyLayer21[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	                      0, 0, 0, 0,     0, 0, 0, 0};
+	                       0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer21[] = {       0, KEY_ESC, KEY_HOME, KEY_END,       KEY_LEFT, KEY_UP, KEY_DOWN, KEY_RIGHT,
                        0, 0, KEY_PAGEUP, KEY_PAGEDOWN,       KEY_LEFT, KEY_DOWN, KEY_RIGHT, KEY_W};
 // TODO this could be problemnatc due to vim hjkl motion

@@ -36,7 +36,7 @@ uint16_t keyboardReportSize = sizeof(HIDKeyboardReport);
 
 
 
-void scanKeys(Layer* keymap, Layer* layerRef, int* heldRef, uint8_t* keyRef, keyboardHIDReport* report);
+void scanKeys(const Layer** keymap, Layer* layerRef, int* heldRef, uint8_t* keyRef, keyboardHIDReport* report);
 
 // scan function for keyboard settings i.e. swtichingmouse mode
 

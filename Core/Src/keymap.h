@@ -5,16 +5,18 @@
 #define KEYMAP_H
 
 typedef struct Layer {
-	uint8_t* impMod;
-	uint8_t* impKey;
-	uint8_t* pModLayer;
-	uint8_t* pKeyLayer;
-	int layerNum;
+	const uint8_t* impMod;
+	const uint8_t* impKey;
+	const uint8_t* pModLayer;
+	const uint8_t* pKeyLayer;
+	const int layerNum;
 }Layer;
 
-extern const Layer* keymap[26];
-
 #define NUMBER_OF_LAYERS 25
+
+extern const Layer* keymap[NUMBER_OF_LAYERS + 1];
+
+
 #endif //KEYMAP_H
 /*0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
     0x09, 0x06,                    // USAGE (Keyboard)
