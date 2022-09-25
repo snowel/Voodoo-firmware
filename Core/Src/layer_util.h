@@ -27,22 +27,20 @@ typedef struct joystick{
 	uint32_t* xAxis;
 	uint32_t xNeutral;
 	uint32_t yNeutral;
-	uint8_t xPolarity; // 0 = Resistance decress (reading incresess) to the right; 1 = Resistance decresses to the left.
-	uint8_t yPolarity; // 0 = Resistance decresses to the top; 1 = ressistance decresses towards the bottom
+	// TODO Enum for polarity
+	int32_t xPolarity; // 1 = Resistance decress (reading incresess) to the right; -1 = Resistance decresses to the left.
+	int32_t yPolarity; // 1 = Resistance decresses to the top; -1 = ressistance decresses towards the bottom
 	enum joydir position;
 } joystick;
 
 //TODO polarity calibration
 
 typedef struct joytresh{
-	uint16_t upTresh;
-	uint16_t downTresh;
-	uint16_t rightTresh;
-	uint16_t leftTresh;
+	uint32_t upTresh;
+	uint32_t downTresh;
+	uint32_t rightTresh;
+	uint32_t leftTresh;
 }joytresh;
-
-joystick leftStick;
-joystick rightStick;
 
 // Calibrating Functions
 
@@ -51,29 +49,17 @@ joystick rightStick;
 //}
 
 
-enum joydir categorizeJoy(joystick* stick, uint32_t tresh){
+enum joydir categorizeJoy(joystick* stick, uint32_t* tresh){
 
-	int32_t xDif;
-	int32_t yDif;
-
-	// Substract the neutral and position for the sign to match cartesian convention
-	if(stick->xPolarity == 0) {
-		xDif = *(stick->xAxis) - stick->xNeutral;
-	} else {
-		xDif = stick->xNeutral - *(stick->xAxis);
-	}
-
-	if(stick->yPolarity == 0) {
-	    yDif = *(stick->yAxis) - stick->yNeutral;
-	} else {
-		yDif = stick->xNeutral - *(stick->xAxis);
-	}
+	// Set the sign to match Cartesian convention
+	int32_t xDif = ((int32_t)*(stick->xAxis) - stick->xNeutral) * stick->xPolarity;
+	int32_t yDif = ((int32_t)*(stick->yAxis) - stick->yNeutral) * stick->yPolarity;
 
 
-	int xMag = abs(xDif);
-	int yMag = abs(yDif);
+	int xMag = abs((int)xDif);
+	int yMag = abs((int)yDif);
 
-	if(xMag <= tresh && yMag <= tresh){
+	if(xMag <= *tresh && yMag <= *tresh){
 		stick->position = CENTERWISE;
 		return CENTERWISE; //Stick not directed
 	}
@@ -258,6 +244,8 @@ void testMain(joystick* stick){
 #define RIGHT_JOY_DOWN 0x01
 // A more generic but confusing way would be to have the directions be 1, 2, 4, 8 and then bitwise shift for the position of every stick
 
+//Tresh setting. Will probably be declared in main and/or configurable live.
+
 #define LEFT_JOY_LEFT_TRESH 0x80
 #define LEFT_JOY_UP_TRESH 0x40
 #define LEFT_JOY_RIGHT_TRESH 0x20
@@ -272,14 +260,9 @@ void testMain(joystick* stick){
 
 typedef uint8_t joystate;
 
-enum joyhandedness {
-	RIGTH_JOY = 1,
-	LEFT_JOY
-};
-
 // byte ID to layer number
-int bitmaskToLayer(uint8_t bitmask){
-	switch (bitmask) {
+int bitmaskToLayer(uint8_t* byteID){
+	switch (*byteID) {
 		case LAYER_1_ID :
 			return 1;
 			break;
@@ -360,48 +343,56 @@ int bitmaskToLayer(uint8_t bitmask){
 }
 
 // Set's layer
-void layerNumToRef(Layer* layerHandle, Layer* keymap, int layerNum){
-	layerHandle = &(keymap[layerNum]);
+void layerNumToRef(Layer* layerHandle, const Layer** keymap, int layerNum){
+	layerHandle = keymap[layerNum];
 }
 
 // Set byte
 
-joystate* setJoystate(joystick* left, joystick* right, joystate* handle, uint32_t tresh){
-	*handle = 0; // Reset the bits of the state mask.
+joystate* setByteID(joystick* left, joystick* right, joystate* handle, uint32_t* tresh){
+	*handle = 0; // Reset the bits of the byteID.
 
 	//TODO Redundant. Can use the joystick struct position.
 	enum joydir leftDir = categorizeJoy(left, tresh);
 	enum joydir rightDir = categorizeJoy(right, tresh);
 
-
+	joystate val;
 
 	switch(leftDir){
 		case NORTHWISE:
-			*handle = *handle | LEFT_JOY_UP;
+			val = LEFT_JOY_UP;
+			*handle = *handle | val;
 			break;
 		case EASTWISE:
-			*handle = *handle | LEFT_JOY_RIGHT;
+			val = LEFT_JOY_RIGHT;
+			*handle = *handle | val;
 			break;
 		case SOUTHWISE:
-			*handle = *handle | LEFT_JOY_DOWN;
+			val = LEFT_JOY_DOWN;
+			*handle = *handle | val;
 			break;
 		case WESTWISE:
-			*handle = *handle | LEFT_JOY_LEFT;
+			val = LEFT_JOY_LEFT;
+			*handle = *handle | val;
 			break;
 	}
 
 	switch(rightDir){
 		case NORTHWISE:
-			*handle = *handle | RIGHT_JOY_UP;
+			val = RIGHT_JOY_UP;
+			*handle = *handle | val;
 			break;
 		case EASTWISE:
-			*handle = *handle | RIGHT_JOY_RIGHT;
+			val = RIGHT_JOY_RIGHT;
+			*handle = *handle | val;
 			break;
 		case SOUTHWISE:
-			*handle = *handle | RIGHT_JOY_DOWN;
+			val = RIGHT_JOY_DOWN;
+			*handle = *handle | val;
 			break;
 		case WESTWISE:
-			*handle = *handle | RIGHT_JOY_LEFT;
+			val = RIGHT_JOY_LEFT;
+			*handle = *handle | val;
 			break;
 		}
 

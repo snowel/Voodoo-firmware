@@ -45,30 +45,24 @@ void setKeyBytes(uint8_t* code, keyboardHIDReport* keyboardReport){
 }
 
 //TODO physical vs imp priority could be configurable
+// Redundant?
 void setReport(int keypress, Layer* layer, keyboardHIDReport* keyboardReport){
 	// Temporary data store
-	uint8_t * impModcode = layer->impMod;
-	uint8_t * impKeycode = layer->impKey;
 	uint8_t * modcode = layer->pModLayer + keypress;
 	uint8_t * keycode = layer->pKeyLayer + keypress;
 
 	setKeyBytes(keycode, keyboardReport);
 	setModByte(modcode, keyboardReport);
-	setKeyBytes(impModcode, keyboardReport);
-	setModByte(impKeycode, keyboardReport);
-}
-void setReportDebug(int keypress, Layer* layer, uint32_t* impmod, uint32_t impkey, uint32_t mod, uint32_t* key){
-	// Imp key
-	uint8_t * modcode = layer->impMod;
-	uint8_t * keycode = layer->impKey;
-	*impmod = (uint32_t)*modcode;
-	impkey = (uint32_t)*keycode;
-	modcode = layer->pModLayer; // TODO implications of pModLayer[keypress] auto dereference rather than using a pointer?
-	keycode = layer->pKeyLayer;
-	mod = (uint32_t)modcode[keypress];// value doesn't update this way
-	*key = (uint32_t)keycode[keypress];
 }
 
+void setImpReport(Layer* layer, keyboardHIDReport* keyboardReport){
+	// Temporary data store
+	uint8_t * impModcode = layer->impMod;
+	uint8_t * impKeycode = layer->impKey;
+
+	setKeyBytes(impKeycode, keyboardReport);
+	setModByte(impModcode, keyboardReport);
+}
 /*old
  * void setReport(int keypress, uint8_t * modArray, uint8_t * keyArray){
 	uint8_t * modcode = modArray + keypress;// Isn't this modArray[keypress]?
@@ -119,9 +113,13 @@ void setHeldReport(int keyIndex, const Layer** keymap, int* heldRef, keyboardHID
  * */
 
 void scanKeys(const Layer** keymap, Layer* layerRef, int* heldRef, uint8_t* keyStates, keyboardHIDReport* report){
+	if (layerRef->impKey != 0 || layerRef->impMod != 0){setImpReport(layerRef, report);};
+
 	for(int i = 0; i < NUMBER_OF_KEYS; i++){
 		//Original if condition was: GPIO_PIN_RESET == HAL_GPIO_ReadPin(keyPorts[i]/, keyPins[i])
-		if(keyStates[i] == 0){
+
+
+		if (keyStates[i] == 0){
 			switch(heldRef[i]){
 			case 0: setReport(i, layerRef, report);
 					setHeld(i, layerRef->layerNum, heldRef);

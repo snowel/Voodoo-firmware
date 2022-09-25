@@ -85,7 +85,6 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
-
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -97,8 +96,9 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ADC1_Init();
   MX_DMA_Init();
+  MX_ADC1_Init();
+
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
@@ -109,26 +109,31 @@ int main(void)
 	// Init and configure the joysticks.
 
 	joystick rightStick;
-	rightStick.xAxis = &analogIn[0];// joystick structs point directly to the buffer data
-	rightStick.yAxis = &analogIn[2];
+	rightStick.xAxis = &analogIn[2];// joystick structs point directly to the buffer data
+	rightStick.yAxis = &analogIn[0];
 	rightStick.xNeutral = 2000;
 	rightStick.yNeutral = 2000;
+	rightStick.xPolarity = -1;
+	rightStick.yPolarity = -1;
 
 	joystick leftStick;
-	leftStick.xAxis = &analogIn[1];
-	leftStick.yAxis = &analogIn[3];
+	leftStick.xAxis = &analogIn[3];
+	leftStick.yAxis = &analogIn[1];
 	leftStick.xNeutral = 2000;
 	leftStick.yNeutral = 2000;
+	leftStick.yPolarity = 1;
+	rightStick.xPolarity = 1;
 
 	// Joystick threshold, fornow uniform. TODO granular struct
 	uint32_t tresh = 600;
 
 	// Init Layer byteID and active layer handle
 
-	joystate layerByteID = 0;
-	Layer* layerHandle = keymap[1];
+	joystate* layerByteID;
+	*layerByteID = 0;
+
+	Layer* layerHandle = (Layer*)keymap[1];
 	const Layer** keymapRef = &keymap[0];
-	//laery 3 harfautls layer 1 does not...
 
 	// Array of key and pin states
 
@@ -137,12 +142,11 @@ int main(void)
 	int isHold[NUMBER_OF_KEYS] = {0, 0, 0, 0,     0, 0, 0, 0,
 			                      0, 0, 0, 0,     0, 0, 0, 0};
 	// Keyboard HID report
-
 	keyboardHIDReport kReport = {0, 0, 0, 0, 0, 0, 0, 0};
 	keyboardHIDReport* pReport = &kReport;
 
-	//DEBUG
-
+	// Start the DMA
+	HAL_ADC_Start_DMA(&hadc1, analogIn, 4);
 
   /* USER CODE END 2 */
 
@@ -153,14 +157,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  // Start the DMA (?)Not sure why it doesn't run when inited outside the while (1)
-	  HAL_ADC_Start_DMA(&hadc1, analogIn, 4);
 
-	  // Set the layer mask to the appropraite id
-	  setJoystate(&leftStick, &rightStick, &layerByteID, tresh);
+	  if (*(rightStick.xAxis) > 3000) {
+		  layerHandle = keymapRef[5];
+	  } else {
+		  layerHandle = keymapRef[1];
+	  }
+	  // Set the layer ID
+	  //setByteID(&leftStick, &rightStick, layerByteID, &tresh);
 
 	  // Get the pointer handle updated with the current active layer
-	  //layerNumToRef(layerHandle, keymap[0], 1);//DEBUG hardcoded q
+	  //layerNumToRef(layerHandle, keymapRef, bitmaskToLayer(layerByteID));
 
 	  // check pressed keys
 	  checkKeyPins(&pinStates[0]);
@@ -170,13 +177,13 @@ int main(void)
 	  scanKeys(keymapRef, layerHandle, &isHold[0], pinStates, pReport);
 
 	  // send report
-	  //USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
-  	  HAL_Delay(100);
-	  // clear report
-	  clearReport(pReport);
-
+	  USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
 	  // wait?
-	  //Temp moved to read the report
+		  HAL_Delay(100);
+
+
+	  // Clear report
+	  clearReport(pReport);
 
 
   }
@@ -269,7 +276,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+  sConfig.SamplingTime = ADC_SAMPLETIME_112CYCLES;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
