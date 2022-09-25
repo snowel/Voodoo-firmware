@@ -52,8 +52,8 @@ typedef struct joytresh{
 enum joydir categorizeJoy(joystick* stick, uint32_t* tresh){
 
 	// Set the sign to match Cartesian convention
-	int32_t xDif = ((int32_t)*(stick->xAxis) - stick->xNeutral) * stick->xPolarity;
-	int32_t yDif = ((int32_t)*(stick->yAxis) - stick->yNeutral) * stick->yPolarity;
+	int32_t xDif = ((*(stick->xAxis)) - stick->xNeutral) * (stick->xPolarity);
+	int32_t yDif = ((*(stick->yAxis)) - stick->yNeutral) * (stick->yPolarity);
 
 
 	int xMag = abs((int)xDif);

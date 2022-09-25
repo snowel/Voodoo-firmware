@@ -122,7 +122,7 @@ int main(void)
 	leftStick.xNeutral = 2000;
 	leftStick.yNeutral = 2000;
 	leftStick.yPolarity = 1;
-	rightStick.xPolarity = 1;
+	leftStick.xPolarity = 1;
 
 	// Joystick threshold, fornow uniform. TODO granular struct
 	uint32_t tresh = 600;
@@ -148,6 +148,7 @@ int main(void)
 	// Start the DMA
 	HAL_ADC_Start_DMA(&hadc1, analogIn, 4);
 
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -158,16 +159,11 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  if (*(rightStick.xAxis) > 3000) {
-		  layerHandle = keymapRef[5];
-	  } else {
-		  layerHandle = keymapRef[1];
-	  }
 	  // Set the layer ID
-	  //setByteID(&leftStick, &rightStick, layerByteID, &tresh);
+	  setByteID(&leftStick, &rightStick, layerByteID, &tresh);
 
 	  // Get the pointer handle updated with the current active layer
-	  //layerNumToRef(layerHandle, keymapRef, bitmaskToLayer(layerByteID));
+	  layerNumToRef(layerHandle, keymapRef, bitmaskToLayer(layerByteID));
 
 	  // check pressed keys
 	  checkKeyPins(&pinStates[0]);
