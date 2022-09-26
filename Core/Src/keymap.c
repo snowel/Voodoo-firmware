@@ -134,12 +134,12 @@ uint8_t modKeyLayer9[] = {
    KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,     KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT, KEY_MOD_LSHIFT,
    KEY_MOD_LCTRL, KEY_MOD_LSHIFT, KEY_MOD_LALT, KEY_MOD_LSHIFT,     KEY_MOD_LSHIFT,KEY_MOD_LALT, KEY_MOD_LSHIFT, KEY_MOD_LCTRL};
 uint8_t keyLayer9[] = {KEY_2, KEY_3, KEY_4, KEY_5,       KEY_6, KEY_7, KEY_8, KEY_9,
-                                    0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
+                                   0, 0, 0, KEY_1,       KEY_0, 0, 0, 0};
 // 10 = down left
 uint8_t impMod10 = 0;
 uint8_t impKey10 = KEY_SPACE;
 uint8_t modKeyLayer10[] = {0, 0, 0, 0,     0, 0, 0, 0,
-	        	   0, 0, 0, 0,     0, 0, 0, 0};
+	        	           0, 0, 0, 0,     0, 0, 0, 0};
 uint8_t keyLayer10[] = {0, 0, 0, 0,     0, 0, 0, 0,
                         0, 0, 0, 0,     0, 0, 0, 0};
 

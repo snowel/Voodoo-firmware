@@ -129,11 +129,14 @@ int main(void)
 
 	// Init Layer byteID and active layer handle
 
-	joystate* layerByteID;
+	joystate byteID;
+	joystate* layerByteID = &byteID;
 	*layerByteID = 0;
 
 	Layer* layerHandle = (Layer*)keymap[1];
 	const Layer** keymapRef = &keymap[0];
+
+	int actvLayerNum = 0;
 
 	// Array of key and pin states
 
@@ -162,8 +165,11 @@ int main(void)
 	  // Set the layer ID
 	  setByteID(&leftStick, &rightStick, layerByteID, &tresh);
 
+	  // Set the active layer number
+	  actvLayerNum = bitmaskToLayer(layerByteID);
+
 	  // Get the pointer handle updated with the current active layer
-	  layerNumToRef(layerHandle, keymapRef, bitmaskToLayer(layerByteID));
+	  layerHandle = layerNumToRef(keymapRef, actvLayerNum);
 
 	  // check pressed keys
 	  checkKeyPins(&pinStates[0]);

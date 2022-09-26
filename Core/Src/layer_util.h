@@ -343,13 +343,19 @@ int bitmaskToLayer(uint8_t* byteID){
 }
 
 // Set's layer
-void layerNumToRef(Layer* layerHandle, const Layer** keymap, int layerNum){
-	layerHandle = keymap[layerNum];
+Layer* layerNumToRef(const Layer** keymap, int layerNum){
+	return (Layer*)keymap[layerNum];
 }
 
+// TODO I'd like to better understand why this does not mutate? I understand and recognize the pattern but can't articulate it:
+/*void layerNumToRef(Layer* layerHandle, const Layer** keymap, int layerNum){
+	layerHandle = (Layer*)keymap[layerNum];
+}
+ *
+ * */
 // Set byte
 
-joystate* setByteID(joystick* left, joystick* right, joystate* handle, uint32_t* tresh){
+joystate setByteID(joystick* left, joystick* right, joystate* handle, uint32_t* tresh){
 	*handle = 0; // Reset the bits of the byteID.
 
 	//TODO Redundant. Can use the joystick struct position.
@@ -396,6 +402,6 @@ joystate* setByteID(joystick* left, joystick* right, joystate* handle, uint32_t*
 			break;
 		}
 
-	return handle;
+	return *handle;
 
 }
