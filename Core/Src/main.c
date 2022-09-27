@@ -181,7 +181,7 @@ int main(void)
 	  // send report
 	  USBD_HID_SendReport(&hUsbDeviceFS, pReport, sizeof(kReport));
 	  // wait?
-		  HAL_Delay(100);
+		  HAL_Delay(10);
 
 
 	  // Clear report

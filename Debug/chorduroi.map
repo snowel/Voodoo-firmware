@@ -5103,7 +5103,7 @@ LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x00000000080081d4                . = ALIGN (0x4)
                 0x00000000080081d4                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000      0x4e4 load address 0x00000000080081d4
+.data           0x0000000020000000      0x4d4 load address 0x00000000080081d4
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -5166,358 +5166,348 @@ LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .data.keyLayer14
                 0x00000000200000fc       0x10 ./Core/Src/keymap.o
                 0x00000000200000fc                keyLayer14
- .data.impKey15
-                0x000000002000010c        0x1 ./Core/Src/keymap.o
-                0x000000002000010c                impKey15
- *fill*         0x000000002000010d        0x3 
  .data.modKeyLayer16
-                0x0000000020000110       0x10 ./Core/Src/keymap.o
-                0x0000000020000110                modKeyLayer16
+                0x000000002000010c       0x10 ./Core/Src/keymap.o
+                0x000000002000010c                modKeyLayer16
  .data.keyLayer16
-                0x0000000020000120       0x10 ./Core/Src/keymap.o
-                0x0000000020000120                keyLayer16
- .data.impKey17
-                0x0000000020000130        0x1 ./Core/Src/keymap.o
-                0x0000000020000130                impKey17
- .data.impKey18
-                0x0000000020000131        0x1 ./Core/Src/keymap.o
-                0x0000000020000131                impKey18
- *fill*         0x0000000020000132        0x2 
+                0x000000002000011c       0x10 ./Core/Src/keymap.o
+                0x000000002000011c                keyLayer16
  .data.modKeyLayer19
-                0x0000000020000134       0x10 ./Core/Src/keymap.o
-                0x0000000020000134                modKeyLayer19
+                0x000000002000012c       0x10 ./Core/Src/keymap.o
+                0x000000002000012c                modKeyLayer19
  .data.keyLayer19
-                0x0000000020000144       0x10 ./Core/Src/keymap.o
-                0x0000000020000144                keyLayer19
+                0x000000002000013c       0x10 ./Core/Src/keymap.o
+                0x000000002000013c                keyLayer19
  .data.keyLayer21
-                0x0000000020000154       0x10 ./Core/Src/keymap.o
-                0x0000000020000154                keyLayer21
+                0x000000002000014c       0x10 ./Core/Src/keymap.o
+                0x000000002000014c                keyLayer21
  .data.modKeyLayer22
-                0x0000000020000164       0x10 ./Core/Src/keymap.o
-                0x0000000020000164                modKeyLayer22
- .data.impKey23
-                0x0000000020000174        0x1 ./Core/Src/keymap.o
-                0x0000000020000174                impKey23
- *fill*         0x0000000020000175        0x3 
+                0x000000002000015c       0x10 ./Core/Src/keymap.o
+                0x000000002000015c                modKeyLayer22
  .data.keyLayer24
-                0x0000000020000178       0x10 ./Core/Src/keymap.o
-                0x0000000020000178                keyLayer24
- .data.impKey25
-                0x0000000020000188        0x1 ./Core/Src/keymap.o
-                0x0000000020000188                impKey25
- *fill*         0x0000000020000189        0x3 
- .data.layer1   0x000000002000018c       0x14 ./Core/Src/keymap.o
-                0x000000002000018c                layer1
- .data.layer2   0x00000000200001a0       0x14 ./Core/Src/keymap.o
-                0x00000000200001a0                layer2
- .data.layer3   0x00000000200001b4       0x14 ./Core/Src/keymap.o
-                0x00000000200001b4                layer3
- .data.layer4   0x00000000200001c8       0x14 ./Core/Src/keymap.o
-                0x00000000200001c8                layer4
- .data.layer5   0x00000000200001dc       0x14 ./Core/Src/keymap.o
-                0x00000000200001dc                layer5
- .data.layer6   0x00000000200001f0       0x14 ./Core/Src/keymap.o
-                0x00000000200001f0                layer6
- .data.layer7   0x0000000020000204       0x14 ./Core/Src/keymap.o
-                0x0000000020000204                layer7
- .data.layer8   0x0000000020000218       0x14 ./Core/Src/keymap.o
-                0x0000000020000218                layer8
- .data.layer9   0x000000002000022c       0x14 ./Core/Src/keymap.o
-                0x000000002000022c                layer9
- .data.layer11  0x0000000020000240       0x14 ./Core/Src/keymap.o
-                0x0000000020000240                layer11
- .data.layer12  0x0000000020000254       0x14 ./Core/Src/keymap.o
-                0x0000000020000254                layer12
- .data.layer13  0x0000000020000268       0x14 ./Core/Src/keymap.o
-                0x0000000020000268                layer13
- .data.layer14  0x000000002000027c       0x14 ./Core/Src/keymap.o
-                0x000000002000027c                layer14
- .data.layer15  0x0000000020000290       0x14 ./Core/Src/keymap.o
-                0x0000000020000290                layer15
- .data.layer16  0x00000000200002a4       0x14 ./Core/Src/keymap.o
-                0x00000000200002a4                layer16
- .data.layer17  0x00000000200002b8       0x14 ./Core/Src/keymap.o
-                0x00000000200002b8                layer17
- .data.layer18  0x00000000200002cc       0x14 ./Core/Src/keymap.o
-                0x00000000200002cc                layer18
- .data.layer19  0x00000000200002e0       0x14 ./Core/Src/keymap.o
-                0x00000000200002e0                layer19
- .data.layer20  0x00000000200002f4       0x14 ./Core/Src/keymap.o
-                0x00000000200002f4                layer20
- .data.layer21  0x0000000020000308       0x14 ./Core/Src/keymap.o
-                0x0000000020000308                layer21
- .data.layer22  0x000000002000031c       0x14 ./Core/Src/keymap.o
-                0x000000002000031c                layer22
- .data.layer23  0x0000000020000330       0x14 ./Core/Src/keymap.o
-                0x0000000020000330                layer23
- .data.layer24  0x0000000020000344       0x14 ./Core/Src/keymap.o
-                0x0000000020000344                layer24
- .data.layer25  0x0000000020000358       0x14 ./Core/Src/keymap.o
-                0x0000000020000358                layer25
- .data.keymap   0x000000002000036c       0x68 ./Core/Src/keymap.o
-                0x000000002000036c                keymap
+                0x000000002000016c       0x10 ./Core/Src/keymap.o
+                0x000000002000016c                keyLayer24
+ .data.layer1   0x000000002000017c       0x14 ./Core/Src/keymap.o
+                0x000000002000017c                layer1
+ .data.layer2   0x0000000020000190       0x14 ./Core/Src/keymap.o
+                0x0000000020000190                layer2
+ .data.layer3   0x00000000200001a4       0x14 ./Core/Src/keymap.o
+                0x00000000200001a4                layer3
+ .data.layer4   0x00000000200001b8       0x14 ./Core/Src/keymap.o
+                0x00000000200001b8                layer4
+ .data.layer5   0x00000000200001cc       0x14 ./Core/Src/keymap.o
+                0x00000000200001cc                layer5
+ .data.layer6   0x00000000200001e0       0x14 ./Core/Src/keymap.o
+                0x00000000200001e0                layer6
+ .data.layer7   0x00000000200001f4       0x14 ./Core/Src/keymap.o
+                0x00000000200001f4                layer7
+ .data.layer8   0x0000000020000208       0x14 ./Core/Src/keymap.o
+                0x0000000020000208                layer8
+ .data.layer9   0x000000002000021c       0x14 ./Core/Src/keymap.o
+                0x000000002000021c                layer9
+ .data.layer11  0x0000000020000230       0x14 ./Core/Src/keymap.o
+                0x0000000020000230                layer11
+ .data.layer12  0x0000000020000244       0x14 ./Core/Src/keymap.o
+                0x0000000020000244                layer12
+ .data.layer13  0x0000000020000258       0x14 ./Core/Src/keymap.o
+                0x0000000020000258                layer13
+ .data.layer14  0x000000002000026c       0x14 ./Core/Src/keymap.o
+                0x000000002000026c                layer14
+ .data.layer15  0x0000000020000280       0x14 ./Core/Src/keymap.o
+                0x0000000020000280                layer15
+ .data.layer16  0x0000000020000294       0x14 ./Core/Src/keymap.o
+                0x0000000020000294                layer16
+ .data.layer17  0x00000000200002a8       0x14 ./Core/Src/keymap.o
+                0x00000000200002a8                layer17
+ .data.layer18  0x00000000200002bc       0x14 ./Core/Src/keymap.o
+                0x00000000200002bc                layer18
+ .data.layer19  0x00000000200002d0       0x14 ./Core/Src/keymap.o
+                0x00000000200002d0                layer19
+ .data.layer20  0x00000000200002e4       0x14 ./Core/Src/keymap.o
+                0x00000000200002e4                layer20
+ .data.layer21  0x00000000200002f8       0x14 ./Core/Src/keymap.o
+                0x00000000200002f8                layer21
+ .data.layer22  0x000000002000030c       0x14 ./Core/Src/keymap.o
+                0x000000002000030c                layer22
+ .data.layer23  0x0000000020000320       0x14 ./Core/Src/keymap.o
+                0x0000000020000320                layer23
+ .data.layer24  0x0000000020000334       0x14 ./Core/Src/keymap.o
+                0x0000000020000334                layer24
+ .data.layer25  0x0000000020000348       0x14 ./Core/Src/keymap.o
+                0x0000000020000348                layer25
+ .data.keymap   0x000000002000035c       0x68 ./Core/Src/keymap.o
+                0x000000002000035c                keymap
  .data.SystemCoreClock
-                0x00000000200003d4        0x4 ./Core/Src/system_stm32f4xx.o
-                0x00000000200003d4                SystemCoreClock
+                0x00000000200003c4        0x4 ./Core/Src/system_stm32f4xx.o
+                0x00000000200003c4                SystemCoreClock
  .data.uwTickPrio
-                0x00000000200003d8        0x4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
-                0x00000000200003d8                uwTickPrio
+                0x00000000200003c8        0x4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+                0x00000000200003c8                uwTickPrio
  .data.uwTickFreq
-                0x00000000200003dc        0x1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
-                0x00000000200003dc                uwTickFreq
- *fill*         0x00000000200003dd        0x3 
+                0x00000000200003cc        0x1 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+                0x00000000200003cc                uwTickFreq
+ *fill*         0x00000000200003cd        0x3 
  .data.USBD_HID
-                0x00000000200003e0       0x38 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
-                0x00000000200003e0                USBD_HID
+                0x00000000200003d0       0x38 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+                0x00000000200003d0                USBD_HID
  .data.USBD_HID_CfgDesc
-                0x0000000020000418       0x22 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- *fill*         0x000000002000043a        0x2 
+                0x0000000020000408       0x22 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ *fill*         0x000000002000042a        0x2 
  .data.USBD_HID_Desc
-                0x000000002000043c        0x9 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- *fill*         0x0000000020000445        0x3 
+                0x000000002000042c        0x9 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ *fill*         0x0000000020000435        0x3 
  .data.USBD_HID_DeviceQualifierDesc
-                0x0000000020000448        0xa ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- *fill*         0x0000000020000452        0x2 
+                0x0000000020000438        0xa ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ *fill*         0x0000000020000442        0x2 
  .data.HID_MOUSE_ReportDesc
-                0x0000000020000454       0x3f ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+                0x0000000020000444       0x3f ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
  .data.HIDInEpAdd
-                0x0000000020000493        0x1 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .data.FS_Desc  0x0000000020000494       0x1c ./USB_DEVICE/App/usbd_desc.o
-                0x0000000020000494                FS_Desc
+                0x0000000020000483        0x1 ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .data.FS_Desc  0x0000000020000484       0x1c ./USB_DEVICE/App/usbd_desc.o
+                0x0000000020000484                FS_Desc
  .data.USBD_FS_DeviceDesc
-                0x00000000200004b0       0x12 ./USB_DEVICE/App/usbd_desc.o
-                0x00000000200004b0                USBD_FS_DeviceDesc
- *fill*         0x00000000200004c2        0x2 
+                0x00000000200004a0       0x12 ./USB_DEVICE/App/usbd_desc.o
+                0x00000000200004a0                USBD_FS_DeviceDesc
+ *fill*         0x00000000200004b2        0x2 
  .data.USBD_LangIDDesc
-                0x00000000200004c4        0x4 ./USB_DEVICE/App/usbd_desc.o
-                0x00000000200004c4                USBD_LangIDDesc
+                0x00000000200004b4        0x4 ./USB_DEVICE/App/usbd_desc.o
+                0x00000000200004b4                USBD_LangIDDesc
  .data.USBD_StringSerial
-                0x00000000200004c8       0x1a ./USB_DEVICE/App/usbd_desc.o
-                0x00000000200004c8                USBD_StringSerial
+                0x00000000200004b8       0x1a ./USB_DEVICE/App/usbd_desc.o
+                0x00000000200004b8                USBD_StringSerial
  *(.RamFunc)
  *(.RamFunc*)
-                0x00000000200004e4                . = ALIGN (0x4)
- *fill*         0x00000000200004e2        0x2 
-                0x00000000200004e4                _edata = .
+                0x00000000200004d4                . = ALIGN (0x4)
+ *fill*         0x00000000200004d2        0x2 
+                0x00000000200004d4                _edata = .
 
-.igot.plt       0x00000000200004e4        0x0 load address 0x00000000080086b8
- .igot.plt      0x00000000200004e4        0x0 c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x00000000200004e4                . = ALIGN (0x4)
+.igot.plt       0x00000000200004d4        0x0 load address 0x00000000080086a8
+ .igot.plt      0x00000000200004d4        0x0 c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x00000000200004d4                . = ALIGN (0x4)
 
-.bss            0x00000000200004e4      0xcb8 load address 0x00000000080086b8
-                0x00000000200004e4                _sbss = .
-                0x00000000200004e4                __bss_start__ = _sbss
+.bss            0x00000000200004d4      0xcb8 load address 0x00000000080086a8
+                0x00000000200004d4                _sbss = .
+                0x00000000200004d4                __bss_start__ = _sbss
  *(.bss)
- .bss           0x00000000200004e4       0x1c c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .bss           0x00000000200004d4       0x1c c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.bss*)
- .bss.impMod1   0x0000000020000500        0x1 ./Core/Src/keymap.o
-                0x0000000020000500                impMod1
- .bss.impKey1   0x0000000020000501        0x1 ./Core/Src/keymap.o
-                0x0000000020000501                impKey1
- *fill*         0x0000000020000502        0x2 
+ .bss.impMod1   0x00000000200004f0        0x1 ./Core/Src/keymap.o
+                0x00000000200004f0                impMod1
+ .bss.impKey1   0x00000000200004f1        0x1 ./Core/Src/keymap.o
+                0x00000000200004f1                impKey1
+ *fill*         0x00000000200004f2        0x2 
  .bss.modKeyLayer1
-                0x0000000020000504       0x10 ./Core/Src/keymap.o
-                0x0000000020000504                modKeyLayer1
- .bss.impMod2   0x0000000020000514        0x1 ./Core/Src/keymap.o
-                0x0000000020000514                impMod2
- .bss.impKey2   0x0000000020000515        0x1 ./Core/Src/keymap.o
-                0x0000000020000515                impKey2
- .bss.impMod3   0x0000000020000516        0x1 ./Core/Src/keymap.o
-                0x0000000020000516                impMod3
- .bss.impKey3   0x0000000020000517        0x1 ./Core/Src/keymap.o
-                0x0000000020000517                impKey3
- .bss.impKey4   0x0000000020000518        0x1 ./Core/Src/keymap.o
-                0x0000000020000518                impKey4
- *fill*         0x0000000020000519        0x3 
+                0x00000000200004f4       0x10 ./Core/Src/keymap.o
+                0x00000000200004f4                modKeyLayer1
+ .bss.impMod2   0x0000000020000504        0x1 ./Core/Src/keymap.o
+                0x0000000020000504                impMod2
+ .bss.impKey2   0x0000000020000505        0x1 ./Core/Src/keymap.o
+                0x0000000020000505                impKey2
+ .bss.impMod3   0x0000000020000506        0x1 ./Core/Src/keymap.o
+                0x0000000020000506                impMod3
+ .bss.impKey3   0x0000000020000507        0x1 ./Core/Src/keymap.o
+                0x0000000020000507                impKey3
+ .bss.impKey4   0x0000000020000508        0x1 ./Core/Src/keymap.o
+                0x0000000020000508                impKey4
+ *fill*         0x0000000020000509        0x3 
  .bss.modKeyLayer4
-                0x000000002000051c       0x10 ./Core/Src/keymap.o
-                0x000000002000051c                modKeyLayer4
- .bss.impMod5   0x000000002000052c        0x1 ./Core/Src/keymap.o
-                0x000000002000052c                impMod5
- *fill*         0x000000002000052d        0x3 
+                0x000000002000050c       0x10 ./Core/Src/keymap.o
+                0x000000002000050c                modKeyLayer4
+ .bss.impMod5   0x000000002000051c        0x1 ./Core/Src/keymap.o
+                0x000000002000051c                impMod5
+ *fill*         0x000000002000051d        0x3 
  .bss.modKeyLayer5
-                0x0000000020000530       0x10 ./Core/Src/keymap.o
-                0x0000000020000530                modKeyLayer5
+                0x0000000020000520       0x10 ./Core/Src/keymap.o
+                0x0000000020000520                modKeyLayer5
  .bss.keyLayer5
-                0x0000000020000540       0x10 ./Core/Src/keymap.o
-                0x0000000020000540                keyLayer5
- .bss.impMod6   0x0000000020000550        0x1 ./Core/Src/keymap.o
-                0x0000000020000550                impMod6
- .bss.impKey6   0x0000000020000551        0x1 ./Core/Src/keymap.o
-                0x0000000020000551                impKey6
- .bss.impMod7   0x0000000020000552        0x1 ./Core/Src/keymap.o
-                0x0000000020000552                impMod7
- .bss.impKey7   0x0000000020000553        0x1 ./Core/Src/keymap.o
-                0x0000000020000553                impKey7
- .bss.impMod8   0x0000000020000554        0x1 ./Core/Src/keymap.o
-                0x0000000020000554                impMod8
- .bss.impKey8   0x0000000020000555        0x1 ./Core/Src/keymap.o
-                0x0000000020000555                impKey8
- .bss.impMod9   0x0000000020000556        0x1 ./Core/Src/keymap.o
-                0x0000000020000556                impMod9
- .bss.impKey9   0x0000000020000557        0x1 ./Core/Src/keymap.o
-                0x0000000020000557                impKey9
- .bss.impMod11  0x0000000020000558        0x1 ./Core/Src/keymap.o
-                0x0000000020000558                impMod11
- .bss.impKey11  0x0000000020000559        0x1 ./Core/Src/keymap.o
-                0x0000000020000559                impKey11
- *fill*         0x000000002000055a        0x2 
+                0x0000000020000530       0x10 ./Core/Src/keymap.o
+                0x0000000020000530                keyLayer5
+ .bss.impMod6   0x0000000020000540        0x1 ./Core/Src/keymap.o
+                0x0000000020000540                impMod6
+ .bss.impKey6   0x0000000020000541        0x1 ./Core/Src/keymap.o
+                0x0000000020000541                impKey6
+ .bss.impMod7   0x0000000020000542        0x1 ./Core/Src/keymap.o
+                0x0000000020000542                impMod7
+ .bss.impKey7   0x0000000020000543        0x1 ./Core/Src/keymap.o
+                0x0000000020000543                impKey7
+ .bss.impMod8   0x0000000020000544        0x1 ./Core/Src/keymap.o
+                0x0000000020000544                impMod8
+ .bss.impKey8   0x0000000020000545        0x1 ./Core/Src/keymap.o
+                0x0000000020000545                impKey8
+ .bss.impMod9   0x0000000020000546        0x1 ./Core/Src/keymap.o
+                0x0000000020000546                impMod9
+ .bss.impKey9   0x0000000020000547        0x1 ./Core/Src/keymap.o
+                0x0000000020000547                impKey9
+ .bss.impMod11  0x0000000020000548        0x1 ./Core/Src/keymap.o
+                0x0000000020000548                impMod11
+ .bss.impKey11  0x0000000020000549        0x1 ./Core/Src/keymap.o
+                0x0000000020000549                impKey11
+ *fill*         0x000000002000054a        0x2 
  .bss.modKeyLayer11
-                0x000000002000055c       0x10 ./Core/Src/keymap.o
-                0x000000002000055c                modKeyLayer11
- .bss.impMod12  0x000000002000056c        0x1 ./Core/Src/keymap.o
-                0x000000002000056c                impMod12
- .bss.impKey12  0x000000002000056d        0x1 ./Core/Src/keymap.o
-                0x000000002000056d                impKey12
- *fill*         0x000000002000056e        0x2 
+                0x000000002000054c       0x10 ./Core/Src/keymap.o
+                0x000000002000054c                modKeyLayer11
+ .bss.impMod12  0x000000002000055c        0x1 ./Core/Src/keymap.o
+                0x000000002000055c                impMod12
+ .bss.impKey12  0x000000002000055d        0x1 ./Core/Src/keymap.o
+                0x000000002000055d                impKey12
+ *fill*         0x000000002000055e        0x2 
  .bss.modKeyLayer12
-                0x0000000020000570       0x10 ./Core/Src/keymap.o
-                0x0000000020000570                modKeyLayer12
+                0x0000000020000560       0x10 ./Core/Src/keymap.o
+                0x0000000020000560                modKeyLayer12
  .bss.keyLayer12
-                0x0000000020000580       0x10 ./Core/Src/keymap.o
-                0x0000000020000580                keyLayer12
- .bss.impMod13  0x0000000020000590        0x1 ./Core/Src/keymap.o
-                0x0000000020000590                impMod13
- .bss.impKey13  0x0000000020000591        0x1 ./Core/Src/keymap.o
-                0x0000000020000591                impKey13
- *fill*         0x0000000020000592        0x2 
+                0x0000000020000570       0x10 ./Core/Src/keymap.o
+                0x0000000020000570                keyLayer12
+ .bss.impMod13  0x0000000020000580        0x1 ./Core/Src/keymap.o
+                0x0000000020000580                impMod13
+ .bss.impKey13  0x0000000020000581        0x1 ./Core/Src/keymap.o
+                0x0000000020000581                impKey13
+ *fill*         0x0000000020000582        0x2 
  .bss.modKeyLayer13
-                0x0000000020000594       0x10 ./Core/Src/keymap.o
-                0x0000000020000594                modKeyLayer13
+                0x0000000020000584       0x10 ./Core/Src/keymap.o
+                0x0000000020000584                modKeyLayer13
  .bss.keyLayer13
-                0x00000000200005a4       0x10 ./Core/Src/keymap.o
-                0x00000000200005a4                keyLayer13
- .bss.impKey14  0x00000000200005b4        0x1 ./Core/Src/keymap.o
-                0x00000000200005b4                impKey14
- *fill*         0x00000000200005b5        0x3 
+                0x0000000020000594       0x10 ./Core/Src/keymap.o
+                0x0000000020000594                keyLayer13
+ .bss.impKey14  0x00000000200005a4        0x1 ./Core/Src/keymap.o
+                0x00000000200005a4                impKey14
+ *fill*         0x00000000200005a5        0x3 
  .bss.modKeyLayer14
-                0x00000000200005b8       0x10 ./Core/Src/keymap.o
-                0x00000000200005b8                modKeyLayer14
- .bss.impMod15  0x00000000200005c8        0x1 ./Core/Src/keymap.o
-                0x00000000200005c8                impMod15
- *fill*         0x00000000200005c9        0x3 
+                0x00000000200005a8       0x10 ./Core/Src/keymap.o
+                0x00000000200005a8                modKeyLayer14
+ .bss.impMod15  0x00000000200005b8        0x1 ./Core/Src/keymap.o
+                0x00000000200005b8                impMod15
+ .bss.impKey15  0x00000000200005b9        0x1 ./Core/Src/keymap.o
+                0x00000000200005b9                impKey15
+ *fill*         0x00000000200005ba        0x2 
  .bss.modKeyLayer15
-                0x00000000200005cc       0x10 ./Core/Src/keymap.o
-                0x00000000200005cc                modKeyLayer15
+                0x00000000200005bc       0x10 ./Core/Src/keymap.o
+                0x00000000200005bc                modKeyLayer15
  .bss.keyLayer15
-                0x00000000200005dc       0x10 ./Core/Src/keymap.o
-                0x00000000200005dc                keyLayer15
- .bss.impMod16  0x00000000200005ec        0x1 ./Core/Src/keymap.o
-                0x00000000200005ec                impMod16
- .bss.impKey16  0x00000000200005ed        0x1 ./Core/Src/keymap.o
-                0x00000000200005ed                impKey16
- .bss.impMod17  0x00000000200005ee        0x1 ./Core/Src/keymap.o
-                0x00000000200005ee                impMod17
- *fill*         0x00000000200005ef        0x1 
+                0x00000000200005cc       0x10 ./Core/Src/keymap.o
+                0x00000000200005cc                keyLayer15
+ .bss.impMod16  0x00000000200005dc        0x1 ./Core/Src/keymap.o
+                0x00000000200005dc                impMod16
+ .bss.impKey16  0x00000000200005dd        0x1 ./Core/Src/keymap.o
+                0x00000000200005dd                impKey16
+ .bss.impMod17  0x00000000200005de        0x1 ./Core/Src/keymap.o
+                0x00000000200005de                impMod17
+ .bss.impKey17  0x00000000200005df        0x1 ./Core/Src/keymap.o
+                0x00000000200005df                impKey17
  .bss.modKeyLayer17
-                0x00000000200005f0       0x10 ./Core/Src/keymap.o
-                0x00000000200005f0                modKeyLayer17
+                0x00000000200005e0       0x10 ./Core/Src/keymap.o
+                0x00000000200005e0                modKeyLayer17
  .bss.keyLayer17
-                0x0000000020000600       0x10 ./Core/Src/keymap.o
-                0x0000000020000600                keyLayer17
- .bss.impMod18  0x0000000020000610        0x1 ./Core/Src/keymap.o
-                0x0000000020000610                impMod18
- *fill*         0x0000000020000611        0x3 
+                0x00000000200005f0       0x10 ./Core/Src/keymap.o
+                0x00000000200005f0                keyLayer17
+ .bss.impMod18  0x0000000020000600        0x1 ./Core/Src/keymap.o
+                0x0000000020000600                impMod18
+ .bss.impKey18  0x0000000020000601        0x1 ./Core/Src/keymap.o
+                0x0000000020000601                impKey18
+ *fill*         0x0000000020000602        0x2 
  .bss.modKeyLayer18
-                0x0000000020000614       0x10 ./Core/Src/keymap.o
-                0x0000000020000614                modKeyLayer18
+                0x0000000020000604       0x10 ./Core/Src/keymap.o
+                0x0000000020000604                modKeyLayer18
  .bss.keyLayer18
-                0x0000000020000624       0x10 ./Core/Src/keymap.o
-                0x0000000020000624                keyLayer18
- .bss.impMod19  0x0000000020000634        0x1 ./Core/Src/keymap.o
-                0x0000000020000634                impMod19
- .bss.impKey19  0x0000000020000635        0x1 ./Core/Src/keymap.o
-                0x0000000020000635                impKey19
- .bss.impMod20  0x0000000020000636        0x1 ./Core/Src/keymap.o
-                0x0000000020000636                impMod20
- .bss.impKey20  0x0000000020000637        0x1 ./Core/Src/keymap.o
-                0x0000000020000637                impKey20
+                0x0000000020000614       0x10 ./Core/Src/keymap.o
+                0x0000000020000614                keyLayer18
+ .bss.impMod19  0x0000000020000624        0x1 ./Core/Src/keymap.o
+                0x0000000020000624                impMod19
+ .bss.impKey19  0x0000000020000625        0x1 ./Core/Src/keymap.o
+                0x0000000020000625                impKey19
+ .bss.impMod20  0x0000000020000626        0x1 ./Core/Src/keymap.o
+                0x0000000020000626                impMod20
+ .bss.impKey20  0x0000000020000627        0x1 ./Core/Src/keymap.o
+                0x0000000020000627                impKey20
  .bss.modKeyLayer20
-                0x0000000020000638       0x10 ./Core/Src/keymap.o
-                0x0000000020000638                modKeyLayer20
+                0x0000000020000628       0x10 ./Core/Src/keymap.o
+                0x0000000020000628                modKeyLayer20
  .bss.keyLayer20
-                0x0000000020000648       0x10 ./Core/Src/keymap.o
-                0x0000000020000648                keyLayer20
- .bss.impMod21  0x0000000020000658        0x1 ./Core/Src/keymap.o
-                0x0000000020000658                impMod21
- .bss.impKey21  0x0000000020000659        0x1 ./Core/Src/keymap.o
-                0x0000000020000659                impKey21
- *fill*         0x000000002000065a        0x2 
+                0x0000000020000638       0x10 ./Core/Src/keymap.o
+                0x0000000020000638                keyLayer20
+ .bss.impMod21  0x0000000020000648        0x1 ./Core/Src/keymap.o
+                0x0000000020000648                impMod21
+ .bss.impKey21  0x0000000020000649        0x1 ./Core/Src/keymap.o
+                0x0000000020000649                impKey21
+ *fill*         0x000000002000064a        0x2 
  .bss.modKeyLayer21
-                0x000000002000065c       0x10 ./Core/Src/keymap.o
-                0x000000002000065c                modKeyLayer21
- .bss.impMod22  0x000000002000066c        0x1 ./Core/Src/keymap.o
-                0x000000002000066c                impMod22
- .bss.impKey22  0x000000002000066d        0x1 ./Core/Src/keymap.o
-                0x000000002000066d                impKey22
- *fill*         0x000000002000066e        0x2 
+                0x000000002000064c       0x10 ./Core/Src/keymap.o
+                0x000000002000064c                modKeyLayer21
+ .bss.impMod22  0x000000002000065c        0x1 ./Core/Src/keymap.o
+                0x000000002000065c                impMod22
+ .bss.impKey22  0x000000002000065d        0x1 ./Core/Src/keymap.o
+                0x000000002000065d                impKey22
+ *fill*         0x000000002000065e        0x2 
  .bss.keyLayer22
-                0x0000000020000670       0x10 ./Core/Src/keymap.o
-                0x0000000020000670                keyLayer22
- .bss.impMod23  0x0000000020000680        0x1 ./Core/Src/keymap.o
-                0x0000000020000680                impMod23
- *fill*         0x0000000020000681        0x3 
+                0x0000000020000660       0x10 ./Core/Src/keymap.o
+                0x0000000020000660                keyLayer22
+ .bss.impMod23  0x0000000020000670        0x1 ./Core/Src/keymap.o
+                0x0000000020000670                impMod23
+ .bss.impKey23  0x0000000020000671        0x1 ./Core/Src/keymap.o
+                0x0000000020000671                impKey23
+ *fill*         0x0000000020000672        0x2 
  .bss.modKeyLayer23
-                0x0000000020000684       0x10 ./Core/Src/keymap.o
-                0x0000000020000684                modKeyLayer23
+                0x0000000020000674       0x10 ./Core/Src/keymap.o
+                0x0000000020000674                modKeyLayer23
  .bss.keyLayer23
-                0x0000000020000694       0x10 ./Core/Src/keymap.o
-                0x0000000020000694                keyLayer23
- .bss.impMod24  0x00000000200006a4        0x1 ./Core/Src/keymap.o
-                0x00000000200006a4                impMod24
- .bss.impKey24  0x00000000200006a5        0x1 ./Core/Src/keymap.o
-                0x00000000200006a5                impKey24
- *fill*         0x00000000200006a6        0x2 
+                0x0000000020000684       0x10 ./Core/Src/keymap.o
+                0x0000000020000684                keyLayer23
+ .bss.impMod24  0x0000000020000694        0x1 ./Core/Src/keymap.o
+                0x0000000020000694                impMod24
+ .bss.impKey24  0x0000000020000695        0x1 ./Core/Src/keymap.o
+                0x0000000020000695                impKey24
+ *fill*         0x0000000020000696        0x2 
  .bss.modKeyLayer24
-                0x00000000200006a8       0x10 ./Core/Src/keymap.o
-                0x00000000200006a8                modKeyLayer24
- .bss.impMod25  0x00000000200006b8        0x1 ./Core/Src/keymap.o
-                0x00000000200006b8                impMod25
- *fill*         0x00000000200006b9        0x3 
+                0x0000000020000698       0x10 ./Core/Src/keymap.o
+                0x0000000020000698                modKeyLayer24
+ .bss.impMod25  0x00000000200006a8        0x1 ./Core/Src/keymap.o
+                0x00000000200006a8                impMod25
+ .bss.impKey25  0x00000000200006a9        0x1 ./Core/Src/keymap.o
+                0x00000000200006a9                impKey25
+ *fill*         0x00000000200006aa        0x2 
  .bss.modKeyLayer25
-                0x00000000200006bc       0x10 ./Core/Src/keymap.o
-                0x00000000200006bc                modKeyLayer25
+                0x00000000200006ac       0x10 ./Core/Src/keymap.o
+                0x00000000200006ac                modKeyLayer25
  .bss.keyLayer25
-                0x00000000200006cc       0x10 ./Core/Src/keymap.o
-                0x00000000200006cc                keyLayer25
+                0x00000000200006bc       0x10 ./Core/Src/keymap.o
+                0x00000000200006bc                keyLayer25
  .bss.BuffLayer
-                0x00000000200006dc       0x14 ./Core/Src/keymap.o
-                0x00000000200006dc                BuffLayer
- .bss.hadc1     0x00000000200006f0       0x48 ./Core/Src/main.o
-                0x00000000200006f0                hadc1
+                0x00000000200006cc       0x14 ./Core/Src/keymap.o
+                0x00000000200006cc                BuffLayer
+ .bss.hadc1     0x00000000200006e0       0x48 ./Core/Src/main.o
+                0x00000000200006e0                hadc1
  .bss.hdma_adc1
-                0x0000000020000738       0x60 ./Core/Src/main.o
-                0x0000000020000738                hdma_adc1
- .bss.uwTick    0x0000000020000798        0x4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
-                0x0000000020000798                uwTick
- .bss.cfgidx.0  0x000000002000079c        0x1 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
- *fill*         0x000000002000079d        0x3 
+                0x0000000020000728       0x60 ./Core/Src/main.o
+                0x0000000020000728                hdma_adc1
+ .bss.uwTick    0x0000000020000788        0x4 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+                0x0000000020000788                uwTick
+ .bss.cfgidx.0  0x000000002000078c        0x1 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
+ *fill*         0x000000002000078d        0x3 
  .bss.hUsbDeviceFS
-                0x00000000200007a0      0x2dc ./USB_DEVICE/App/usb_device.o
-                0x00000000200007a0                hUsbDeviceFS
+                0x0000000020000790      0x2dc ./USB_DEVICE/App/usb_device.o
+                0x0000000020000790                hUsbDeviceFS
  .bss.USBD_StrDesc
-                0x0000000020000a7c      0x200 ./USB_DEVICE/App/usbd_desc.o
-                0x0000000020000a7c                USBD_StrDesc
+                0x0000000020000a6c      0x200 ./USB_DEVICE/App/usbd_desc.o
+                0x0000000020000a6c                USBD_StrDesc
  .bss.hpcd_USB_OTG_FS
-                0x0000000020000c7c      0x50c ./USB_DEVICE/Target/usbd_conf.o
-                0x0000000020000c7c                hpcd_USB_OTG_FS
- .bss.mem.0     0x0000000020001188       0x14 ./USB_DEVICE/Target/usbd_conf.o
+                0x0000000020000c6c      0x50c ./USB_DEVICE/Target/usbd_conf.o
+                0x0000000020000c6c                hpcd_USB_OTG_FS
+ .bss.mem.0     0x0000000020001178       0x14 ./USB_DEVICE/Target/usbd_conf.o
  *(COMMON)
-                0x000000002000119c                . = ALIGN (0x4)
-                0x000000002000119c                _ebss = .
-                0x000000002000119c                __bss_end__ = _ebss
+                0x000000002000118c                . = ALIGN (0x4)
+                0x000000002000118c                _ebss = .
+                0x000000002000118c                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x000000002000119c      0x604 load address 0x00000000080086b8
-                0x00000000200011a0                . = ALIGN (0x8)
- *fill*         0x000000002000119c        0x4 
+                0x000000002000118c      0x604 load address 0x00000000080086a8
+                0x0000000020001190                . = ALIGN (0x8)
+ *fill*         0x000000002000118c        0x4 
                 [!provide]                        PROVIDE (end = .)
-                0x00000000200011a0                PROVIDE (_end = .)
-                0x00000000200013a0                . = (. + _Min_Heap_Size)
- *fill*         0x00000000200011a0      0x200 
-                0x00000000200017a0                . = (. + _Min_Stack_Size)
- *fill*         0x00000000200013a0      0x400 
-                0x00000000200017a0                . = ALIGN (0x8)
+                0x0000000020001190                PROVIDE (_end = .)
+                0x0000000020001390                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020001190      0x200 
+                0x0000000020001790                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020001390      0x400 
+                0x0000000020001790                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -5595,30 +5585,30 @@ LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
 LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD c:/st/stm32cubeide_1.9.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x0000000000000000    0x10c22
+.debug_info     0x0000000000000000    0x10c21
  .debug_info    0x0000000000000000      0x550 ./Core/Src/keyb_util.o
- .debug_info    0x0000000000000550      0xa7c ./Core/Src/keymap.o
- .debug_info    0x0000000000000fcc     0x188f ./Core/Src/main.o
- .debug_info    0x000000000000285b      0xa11 ./Core/Src/stm32f4xx_hal_msp.o
- .debug_info    0x000000000000326c      0x8cd ./Core/Src/stm32f4xx_it.o
- .debug_info    0x0000000000003b39      0x54f ./Core/Src/system_stm32f4xx.o
- .debug_info    0x0000000000004088       0x22 ./Core/Startup/startup_stm32f401ccux.o
- .debug_info    0x00000000000040aa      0x906 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
- .debug_info    0x00000000000049b0      0xd68 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
- .debug_info    0x0000000000005718      0xd85 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
- .debug_info    0x000000000000649d      0x947 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
- .debug_info    0x0000000000006de4      0x78e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
- .debug_info    0x0000000000007572     0x168d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o
- .debug_info    0x0000000000008bff      0x717 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o
- .debug_info    0x0000000000009316      0x98c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
- .debug_info    0x0000000000009ca2     0x1a97 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
- .debug_info    0x000000000000b739      0xb0b ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
- .debug_info    0x000000000000c244      0xee7 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
- .debug_info    0x000000000000d12b      0xb7f ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
- .debug_info    0x000000000000dcaa      0x7da ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o
- .debug_info    0x000000000000e484      0x661 ./USB_DEVICE/App/usb_device.o
- .debug_info    0x000000000000eae5      0x498 ./USB_DEVICE/App/usbd_desc.o
- .debug_info    0x000000000000ef7d     0x1ca5 ./USB_DEVICE/Target/usbd_conf.o
+ .debug_info    0x0000000000000550      0xa7b ./Core/Src/keymap.o
+ .debug_info    0x0000000000000fcb     0x188f ./Core/Src/main.o
+ .debug_info    0x000000000000285a      0xa11 ./Core/Src/stm32f4xx_hal_msp.o
+ .debug_info    0x000000000000326b      0x8cd ./Core/Src/stm32f4xx_it.o
+ .debug_info    0x0000000000003b38      0x54f ./Core/Src/system_stm32f4xx.o
+ .debug_info    0x0000000000004087       0x22 ./Core/Startup/startup_stm32f401ccux.o
+ .debug_info    0x00000000000040a9      0x906 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o
+ .debug_info    0x00000000000049af      0xd68 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o
+ .debug_info    0x0000000000005717      0xd85 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o
+ .debug_info    0x000000000000649c      0x947 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o
+ .debug_info    0x0000000000006de3      0x78e ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o
+ .debug_info    0x0000000000007571     0x168d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o
+ .debug_info    0x0000000000008bfe      0x717 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o
+ .debug_info    0x0000000000009315      0x98c ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o
+ .debug_info    0x0000000000009ca1     0x1a97 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o
+ .debug_info    0x000000000000b738      0xb0b ./Middlewares/ST/STM32_USB_Device_Library/Class/HID/Src/usbd_hid.o
+ .debug_info    0x000000000000c243      0xee7 ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o
+ .debug_info    0x000000000000d12a      0xb7f ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o
+ .debug_info    0x000000000000dca9      0x7da ./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o
+ .debug_info    0x000000000000e483      0x661 ./USB_DEVICE/App/usb_device.o
+ .debug_info    0x000000000000eae4      0x498 ./USB_DEVICE/App/usbd_desc.o
+ .debug_info    0x000000000000ef7c     0x1ca5 ./USB_DEVICE/Target/usbd_conf.o
 
 .debug_abbrev   0x0000000000000000     0x2f1b
  .debug_abbrev  0x0000000000000000      0x1af ./Core/Src/keyb_util.o
