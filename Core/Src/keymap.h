@@ -18,7 +18,9 @@ extern const Layer* keymap[NUMBER_OF_LAYERS + 1];
 
 
 #endif //KEYMAP_H
-/*0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
+/*
+ * descriptor size 63U
+    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)
     0x09, 0x06,                    // USAGE (Keyboard)
     0xa1, 0x01,                    // COLLECTION (Application)
     0x05, 0x07,                    //   USAGE_PAGE (Keyboard)

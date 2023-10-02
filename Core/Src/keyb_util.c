@@ -5,22 +5,26 @@
 // Update the key-press array.
 // This is where the keys "index" is determined.
 void checkKeyPins(uint8_t* keyRef){
-	keyRef[4] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_4);
+	// TODO This func can be a bit counter for 2 bytes showing the states of each pin
+	// 1 byte will be sent over UART from the off-hand board
+	// The other byte could be generated locally if there are LL functions to flip a specific bit
+	// otherwise GPIO registers are probably the way to go!!!
 	keyRef[0] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_13);
 	keyRef[1] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_15);
 	keyRef[2] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
-	keyRef[3] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_5);
-	keyRef[8] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
-	keyRef[9] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
-	keyRef[10] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
-	keyRef[11] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
-	keyRef[5] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5);
+	keyRef[3] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
+	keyRef[4] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
+	keyRef[5] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
 	keyRef[6] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6);
-	keyRef[7] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);
-	keyRef[12] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);
-	keyRef[13] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
+	keyRef[7] = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5);
+	//keyRef[8] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6);
+	//keyRef[9] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_7);
+	//keyRef[10] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8);
+	//keyRef[11] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9);
+	//keyRef[12] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0);
+	//keyRef[13] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_1);
 	//keyRef[14] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2); -- Hard-fault culprit
-	keyRef[15] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
+	//keyRef[15] = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
 }
 
 
@@ -57,12 +61,13 @@ void setReport(int keypress, Layer* layer, keyboardHIDReport* keyboardReport){
 
 void setImpReport(Layer* layer, keyboardHIDReport* keyboardReport){
 	// Temporary data store
-	uint8_t * impModcode = layer->impMod;
+	uint8_t * impModcode = layer->impMod;//TODO does this overwrite a held mod key on another layer? It shouldn't since it uses setModByte which is
 	uint8_t * impKeycode = layer->impKey;
 
 	setKeyBytes(impKeycode, keyboardReport);
 	setModByte(impModcode, keyboardReport);
 }
+
 /*old
  * void setReport(int keypress, uint8_t * modArray, uint8_t * keyArray){
 	uint8_t * modcode = modArray + keypress;// Isn't this modArray[keypress]?

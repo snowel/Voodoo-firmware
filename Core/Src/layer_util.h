@@ -204,7 +204,6 @@ void testMain(joystick* stick){
 // bit 0 - 1 : rigth-down
 
 // Layer byteIDs
-
 #define LAYER_1_ID 0// 1 = none none - 0 + 0
 #define LAYER_2_ID 1// 2 = none down - 0 + 1
 #define LAYER_3_ID 2// 3 = none right - 0 + 2

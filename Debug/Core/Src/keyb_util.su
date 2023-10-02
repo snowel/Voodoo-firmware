@@ -1,9 +1,9 @@
 ../Core/Src/keyb_util.c:7:6:checkKeyPins	24	static
-../Core/Src/keyb_util.c:27:6:setModByte	16	static
-../Core/Src/keyb_util.c:31:6:setKeyBytes	16	static
-../Core/Src/keyb_util.c:49:6:setReport	32	static
-../Core/Src/keyb_util.c:58:6:setImpReport	24	static
-../Core/Src/keyb_util.c:78:6:setHeld	24	static
-../Core/Src/keyb_util.c:84:6:setHeldReport	32	static
-../Core/Src/keyb_util.c:115:6:scanKeys	32	static
-../Core/Src/keyb_util.c:141:6:clearReport	16	static
+../Core/Src/keyb_util.c:31:6:setModByte	16	static
+../Core/Src/keyb_util.c:35:6:setKeyBytes	16	static
+../Core/Src/keyb_util.c:53:6:setReport	32	static
+../Core/Src/keyb_util.c:62:6:setImpReport	24	static
+../Core/Src/keyb_util.c:83:6:setHeld	24	static
+../Core/Src/keyb_util.c:89:6:setHeldReport	32	static
+../Core/Src/keyb_util.c:120:6:scanKeys	32	static
+../Core/Src/keyb_util.c:146:6:clearReport	16	static

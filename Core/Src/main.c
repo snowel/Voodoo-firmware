@@ -109,16 +109,16 @@ int main(void)
 	// Init and configure the joysticks.
 
 	joystick rightStick;
-	rightStick.xAxis = &analogIn[2];// joystick structs point directly to the buffer data
-	rightStick.yAxis = &analogIn[0];
+	rightStick.xAxis = &analogIn[0];// joystick structs point directly to the buffer data
+	rightStick.yAxis = &analogIn[2];
 	rightStick.xNeutral = 2000;
 	rightStick.yNeutral = 2000;
 	rightStick.xPolarity = -1;
 	rightStick.yPolarity = -1;
 
 	joystick leftStick;
-	leftStick.xAxis = &analogIn[3];
-	leftStick.yAxis = &analogIn[1];
+	leftStick.xAxis = &analogIn[1];
+	leftStick.yAxis = &analogIn[3];
 	leftStick.xNeutral = 2000;
 	leftStick.yNeutral = 2000;
 	leftStick.yPolarity = 1;
